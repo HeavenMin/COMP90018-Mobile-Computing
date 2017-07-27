@@ -34,5 +34,3 @@ Individual form | Oct.9 10am |
 
 ### Example of a fictional research paper
 >[Joseph Lindley and Paul Coulton. 2015. Game of Drones. (CHI PLAY '15)](http://eprints.lancs.ac.uk/75187/1/Game_of_Drones_pre_print.pdf)
-
-- [ ] aaa
