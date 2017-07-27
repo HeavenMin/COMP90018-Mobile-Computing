@@ -1,7 +1,7 @@
 # COMP90018-Mobile-Computing
 
 ## The Brief
-> Enabling active decision-making for a safer future
+`Enabling active decision-making for a safer future`
 
 ## Two Assignments
 _Design fiction_ and _working application prototype_  
