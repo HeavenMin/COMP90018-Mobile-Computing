@@ -16,13 +16,13 @@ Individual form | Oct.9 10am |
 
 ## Assignments1 TODO
 1. Choose the research topic
-* Find recent work on the topic
-* Imagine an Application, create __diagrams__, __mockups__, __scenarios__
-* imagine the research process to design and evaluate the Application
-* write report using _ACM Extended Abstracts format_ in [ShareLatex](https://www.sharelatex.com/). See tamplate: [Template](https://www.sharelatex.com/templates/other/chi-extended-abstracts-latex-template)
+2. Find recent work on the topic
+3. Imagine an Application, create __diagrams__, __mockups__, __scenarios__
+4. imagine the research process to design and evaluate the Application
+5. write report using _ACM Extended Abstracts format_ in [ShareLatex](https://www.sharelatex.com/). See tamplate: [Template](https://www.sharelatex.com/templates/other/chi-extended-abstracts-latex-template)
 >  Written as if the work has been already done. Use the past tense and the first person.Write in active voice .
 
-* Record the presentation video. Contain
+6. Record the presentation video. Contain
   * short overview of the related work
   * how the proposed prototype is different to or builds upon these past works
   * a visual presentation
