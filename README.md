@@ -15,7 +15,7 @@ Individual form | Aug.28 10am |
 Individual form | Oct.9 10am |
 
 ## Assignments1 TODO
-1. Choose the research topic - [ ]
+1. Choose the research topic
 2. Find recent work on the topic
 3. Imagine an Application, create __diagrams__, __mockups__, __scenarios__
 4. imagine the research process to design and evaluate the Application
@@ -34,3 +34,5 @@ Individual form | Oct.9 10am |
 
 ### Example of a fictional research paper
 >[Joseph Lindley and Paul Coulton. 2015. Game of Drones. (CHI PLAY '15)](http://eprints.lancs.ac.uk/75187/1/Game_of_Drones_pre_print.pdf)
+
+- [ ] aaa
