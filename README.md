@@ -1,5 +1,5 @@
 # COMP90018-Mobile-Computing
-# COMP90018-Mobile-Computing
+
 ## The Brief
 > Enabling active decision-making for a safer future
 
