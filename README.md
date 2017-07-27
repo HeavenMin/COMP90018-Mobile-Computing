@@ -30,7 +30,7 @@ Individual form | Oct.9 10am |
   * how the application addresses the brief
 
 ### Info about fictional research papers
->[Lindley, Joseph, and Paul Coulton. "Pushing the limits of design fiction: the case for fictional research papers (CHI 2016).]()
+>[Lindley, Joseph, and Paul Coulton. "Pushing the limits of design fiction: the case for fictional research papers (CHI 2016).](http://eprints.lancs.ac.uk/78122/1/Pushing_DF_to_the_limit_rebuttal_edits_version_6_1_16_W97_.pdf)
 
 ### example of a fictional research paper
 >[Joseph Lindley and Paul Coulton. 2015. Game of Drones. (CHI PLAY '15)]()
