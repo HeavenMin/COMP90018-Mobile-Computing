@@ -15,7 +15,7 @@ Individual form | Aug.28 10am |
 Individual form | Oct.9 10am |
 
 ## Assignments1 TODO
-1. Choose the research topic
+1. Choose the research topic - [ ]
 2. Find recent work on the topic
 3. Imagine an Application, create __diagrams__, __mockups__, __scenarios__
 4. imagine the research process to design and evaluate the Application
