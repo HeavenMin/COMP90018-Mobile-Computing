@@ -13,7 +13,6 @@ _Deliverable_ | _Deadline_ | _Weight_
 Individual form | Aug.28 10am | 
 3-min demonstration & Github Link of Application Prototype | Oct.9 10am | 20%
 Individual form | Oct.9 10am |
- | | 40% | Total
 
 ## Assignments1 TODO
 1. Choose the research topic
