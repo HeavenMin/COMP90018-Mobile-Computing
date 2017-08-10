@@ -29,6 +29,8 @@ Individual form | Oct.9 10am |
   * an example of a usage scenario
   * how the application addresses the brief
 
+[Discussion GoogleDoc](https://docs.google.com/document/d/1Q6A8wVdk1GwP62G569iRzi2zcAS-wKBqz6xxGaEUlF0/edit#)
+
 ### Info about fictional research papers
 >[Lindley, Joseph, and Paul Coulton. "Pushing the limits of design fiction: the case for fictional research papers (CHI 2016).](http://eprints.lancs.ac.uk/78122/1/Pushing_DF_to_the_limit_rebuttal_edits_version_6_1_16_W97_.pdf)
 
