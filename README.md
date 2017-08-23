@@ -36,3 +36,24 @@ Individual form | Oct.9 10am |
 
 ### Example of a fictional research paper
 >[Joseph Lindley and Paul Coulton. 2015. Game of Drones. (CHI PLAY '15)](http://eprints.lancs.ac.uk/75187/1/Game_of_Drones_pre_print.pdf)
+
+### The paper evaluation criteria
+  * Does it address the brief?
+  * Quality of the paper formatting: does the paper follow the format? Are the references in the right format? Is the research appropriately illustrated?
+  * Quality of the writing: is the paper well-structured and organised? Is it written clearly? Is it engaging? Are there grammar or spelling mistakes?
+  * Coverage of related work: is the related work appropriately covered? Are there important works missing? Are the works appropriately referenced? Are the works discussed relevant to the proposed research plan?
+  * Quality of the fictional prototype: is the imagined prototype novel? Does it build upon previous work?
+  * Quality of the research plan: are the design methods appropriate for eliciting requirements from the chosen user group? Are the evaluation methods appropriate for assessing the prototype? Are the methods described in detail?
+  
+### The video scored criteria
+  * Quality of the visuals
+  * Quality of the delivery
+  * Quality of the discussion
+  
+### Assignment2 TODO
+### Requirements
+  * It must address a problem that fits the __design brief__
+  * It must fulfil a need, address a problem, or explore an opportunity that benefits a specific
+user group other than __students__
+  * It must make use of __sensors__ in the device
+  * It must make use of the __Azure cloud__ infrastructure
