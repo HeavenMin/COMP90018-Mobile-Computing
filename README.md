@@ -17,7 +17,7 @@ Individual form | Oct.9 10am |
 ### Assignments1 TODO
 1. Choose the research topic
 2. Find recent work on the topic
-3. Imagine an Application, create __diagrams__, __mockups__, __scenarios__
+3. Imagine an Application, create __diagrams__, __mockups__, __scenarios__, does not have to be a mobile phone application
 4. imagine the research process to design and evaluate the Application
 5. write report using _ACM Extended Abstracts format_ in [ShareLatex](https://www.sharelatex.com/project/597a6e27ca5686f65d5a37f1). See tamplate: [Template](https://www.sharelatex.com/templates/other/chi-extended-abstracts-latex-template)
 >  Written as if the work has been already done. Use the past tense and the first person.Write in active voice .
