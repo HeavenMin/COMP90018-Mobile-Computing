@@ -26,26 +26,26 @@ Individual form | Oct.9 10am |   |
   * Need to document the source code appropriately.
 
 #### Video
-  * _explanation of the problem_ the app aims to solve
-  * _a justification of how it addresses the design breif_
-  * description of the applicaiton _design process_
-    * _videos or pictures_ of brainstorming sessions and participant interviews
-    * _consent forms_
-  * _live demonstration_
+  * __explanation of the problem__ the app aims to solve
+  * __a justification of how it addresses the design breif__
+  * description of the applicaiton __design process__
+    * __videos or pictures__ of brainstorming sessions and participant interviews
+    * __consent forms__
+  * __live demonstration__
 
 #### Criteria
   * Fit to the brief
     * creative
-    * fulfil a real need
-    * solve a real problem, explore a real opportunity
-    * supporting active decision-making
+    * fulfil a __real need__
+    * solve a __real problem__, explore a real opportunity
+    * supporting __active decision-making__
     * likely to lead to a safer future
   * User Research
-   * follow user-centred design process
-   * go out and interview users other than students
+   * follow __user-centred design process__
+   * go out and __interview__ users other than students
   * User experience
-    * the usability of the application
-    * make good use of aesthetic design principles
+    * the __usability__ of the application
+    * make good use of __aesthetic design__ principles
   * Sensors
     * make creative use of the sensors
   * Cloud
