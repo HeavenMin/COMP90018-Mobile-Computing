@@ -18,14 +18,14 @@ Individual form | Oct.9 10am |   |
 
 ### Assignment2 (App Prototype) TODO
 ### Requirements
-##### Application
+#### Application
   * It must address a problem that fits the __design brief__
   * It must fulfil a need, address a problem, or explore an opportunity that benefits a specific user group other than __students__
   * It must make use of __sensors__ in the device
   * It must make use of the __Azure cloud__ infrastructure
   * Need to document the source code appropriately.
 
-##### Video
+#### Video
   * _explanation of the problem_ the app aims to solve
   * _a justification of how it addresses the design breif_
   * description of the applicaiton _design process_
@@ -33,7 +33,7 @@ Individual form | Oct.9 10am |   |
     * _consent forms_
   * _live demonstration_
 
-##### Criteria
+#### Criteria
   * Fit to the brief
     * creative
     * fulfil a real need
