@@ -6,14 +6,55 @@
 ### Two Assignments
 _Design fiction_ and _working application prototype_  
 
-_Deliverable_ | _Deadline_ | _Weight_
-------------- | ---------- | --------
-3000-word Fictional research paper | Aug.28 10am | 10%
-10-min video | Aug.28 10am | 10%
-Individual form | Aug.28 10am | 
-3-min demonstration & Github Link of Application Prototype | Oct.9 10am | 20%
-Individual form | Oct.9 10am |
+_Deliverable_ | _Deadline_ | _Weight_ | _State_
+------------- | ---------- | -------- | -------
+3000-word Fictional research paper | Aug.28 10am | 10% | ✓
+10-min video | Aug.28 10am | 10% | ✓
+Individual form | Aug.28 10am |  | ✓
+3-min demonstration & Github Link of Application Prototype | Oct.9 10am | 20% |
+Individual form | Oct.9 10am |   |
 
+[Discussion GoogleDoc](https://docs.google.com/document/d/1Q6A8wVdk1GwP62G569iRzi2zcAS-wKBqz6xxGaEUlF0/edit#)
+
+### Assignment2 (App Prototype) TODO
+### Requirements
+##### Application
+  * It must address a problem that fits the __design brief__
+  * It must fulfil a need, address a problem, or explore an opportunity that benefits a specific user group other than __students__
+  * It must make use of __sensors__ in the device
+  * It must make use of the __Azure cloud__ infrastructure
+  * Need to document the source code appropriately.
+
+##### Video
+  * _explanation of the problem_ the app aims to solve
+  * _a justification of how it addresses the design breif_
+  * description of the applicaiton _design process_
+    * _videos or pictures_ of brainstorming sessions and participant interviews
+    * _consent forms_
+  * _live demonstration_
+
+##### Criteria
+  * Fit to the brief
+    * creative
+    * fulfil a real need
+    * solve a real problem, explore a real opportunity
+    * supporting active decision-making
+    * likely to lead to a safer future
+  * User Research
+   * follow user-centred design process
+   * go out and interview users other than students
+  * User experience
+    * the usability of the application
+    * make good use of aesthetic design principles
+  * Sensors
+    * make creative use of the sensors
+  * Cloud
+    * make creative use of the cloud
+  * Code
+    * well structured
+    * well documented
+    * implement what is shown in the video
+---
 ### Assignments1 TODO
 1. Choose the research topic
 2. Find recent work on the topic
@@ -29,8 +70,6 @@ Individual form | Oct.9 10am |
   * an example of a usage scenario
   * how the application addresses the brief
 
-[Discussion GoogleDoc](https://docs.google.com/document/d/1Q6A8wVdk1GwP62G569iRzi2zcAS-wKBqz6xxGaEUlF0/edit#)
-
 ### Info about fictional research papers
 >[Lindley, Joseph, and Paul Coulton. "Pushing the limits of design fiction: the case for fictional research papers (CHI 2016).](http://eprints.lancs.ac.uk/78122/1/Pushing_DF_to_the_limit_rebuttal_edits_version_6_1_16_W97_.pdf)
 
@@ -44,16 +83,8 @@ Individual form | Oct.9 10am |
   * Coverage of related work: is the related work appropriately covered? Are there important works missing? Are the works appropriately referenced? Are the works discussed relevant to the proposed research plan?
   * Quality of the fictional prototype: is the imagined prototype novel? Does it build upon previous work?
   * Quality of the research plan: are the design methods appropriate for eliciting requirements from the chosen user group? Are the evaluation methods appropriate for assessing the prototype? Are the methods described in detail?
-  
+
 ### The video scored criteria
   * Quality of the visuals
   * Quality of the delivery
   * Quality of the discussion
-  
-### Assignment2 TODO
-### Requirements
-  * It must address a problem that fits the __design brief__
-  * It must fulfil a need, address a problem, or explore an opportunity that benefits a specific
-user group other than __students__
-  * It must make use of __sensors__ in the device
-  * It must make use of the __Azure cloud__ infrastructure
