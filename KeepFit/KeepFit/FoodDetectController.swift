@@ -22,15 +22,16 @@ class FoodDetectController: UIViewController {
         super.viewDidLoad()
         
         //init image in screen
-        guard let image = UIImage(named: "banana") else {
+        guard let image = UIImage(named: "scene") else {
             fatalError("No starting image")
         }
         photoScene.image = image
         //CIImage using for COreML
-        guard let ciImage = CIImage(image: image) else {
-            fatalError("Couldn't convert UIImage to CIImage")
-        }
-        detectScene(image: ciImage)
+//        guard let ciImage = CIImage(image: image) else {
+//            fatalError("Couldn't convert UIImage to CIImage")
+//        }
+//        detectScene(image: ciImage)
+        prediction.text = "Please choose a food you want to add form Photo Library or Camera."
         
     }
     
@@ -42,6 +43,7 @@ class FoodDetectController: UIViewController {
 
 extension FoodDetectController {
     
+    //old function for chooes the ImageSheet by one button
     @IBAction func getImage(_ sender: Any) {
         // old method
         //        let pickerController = UIImagePickerController()
@@ -50,8 +52,10 @@ extension FoodDetectController {
         //        present(pickerController, animated: true)
         
         chooseImageSheet()
+        
     }
     
+    //old function for chooes the ImageSheet by one button
     func chooseImageSheet() {
         
         let actionSheet = UIAlertController(title: "From", message: nil, preferredStyle: .actionSheet)
@@ -67,6 +71,14 @@ extension FoodDetectController {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
         present(actionSheet, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func getImageFromCamera(_ sender: Any) {
+        self.showImagePickerForSourceType(.camera)
+    }
+    
+    @IBAction func getImageFromPhotoLibrary(_ sender: Any) {
+        self.showImagePickerForSourceType(.photoLibrary)
     }
     
     func showImagePickerForSourceType(_ sourceType: UIImagePickerControllerSourceType) {
