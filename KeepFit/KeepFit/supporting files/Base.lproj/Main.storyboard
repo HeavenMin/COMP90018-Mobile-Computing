@@ -29,13 +29,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXe-w0-aL8">
-                                <rect key="frame" x="153" y="495" width="69" height="30"/>
+                                <rect key="frame" x="16" y="432" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="DoPredict"/>
                                 <connections>
                                     <action selector="getImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qsq-9o-OM7"/>
                                 </connections>
                             </button>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mnd-Xy-UQp">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Run" image="run_2" id="B29-wd-J2Y"/>
+                                    <tabBarItem title="Food" image="food" id="NfY-cQ-JeA"/>
+                                    <tabBarItem title="Profile" image="profile" id="l91-eV-fdc"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -47,7 +57,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
+            <point key="canvasLocation" x="127" y="-215"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="food" width="30" height="30"/>
+        <image name="profile" width="30" height="30"/>
+        <image name="run_2" width="30" height="30"/>
+    </resources>
 </document>
