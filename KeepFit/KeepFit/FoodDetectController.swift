@@ -126,8 +126,8 @@ extension FoodDetectController {
     
     //funciton for make the detection
     func detectScene(image: CIImage) {
-        prediction.text = "Detecting your food ING..."
-        foodInformation.text = "Detecting your food ING..."
+        prediction.text = "Detecting your food..."
+        foodInformation.text = "Loading your food information..."
         
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
             fatalError("Can't load the ML model.")
@@ -139,9 +139,11 @@ extension FoodDetectController {
                     fatalError("Unexpected result type from VNCoreMLRequest.")
             }
             
+            //Originally used to distinguish vowel sounds
             //let article = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
             DispatchQueue.main.async { [weak self] in
-                self?.prediction.text = "\(topResult.identifier)"
+                //get the first predict result in the top result
+                self?.prediction.text = "\(topResult.identifier.components(separatedBy: ",")[0])"
                 self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier)"
             }
         }
