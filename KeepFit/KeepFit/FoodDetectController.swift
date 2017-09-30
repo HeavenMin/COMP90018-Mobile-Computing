@@ -22,6 +22,15 @@ class FoodDetectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //switch view with gestures
+//        let left = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+//        left.direction = .left
+//        self.view.addGestureRecognizer(left)
+//
+//        let right = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
+//        right.direction = .right
+//        self.view.addGestureRecognizer(right)
+        
         //init image in screen
         guard let image = UIImage(named: "scene") else {
             fatalError("No starting image")
@@ -52,6 +61,15 @@ class FoodDetectController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //switch view with gestures
+    @objc func swipeLeft() {
+        let total = self.tabBarController!.viewControllers!.count - 1
+        tabBarController!.selectedIndex = min(total, tabBarController!.selectedIndex + 1)
+    }
+    @objc func swipeRight() {
+        tabBarController!.selectedIndex = max(0, tabBarController!.selectedIndex - 1)
     }
     
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		571891341F7E0EFD009EFDB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5775C61D1F7E0D920002E2F9 /* Assets.xcassets */; };
+		576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */; };
+		576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863BA1F7F6CCF00BA85DD /* Transitioning.swift */; };
 		577F3E891F7E38A90093A6E7 /* FoodDetectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */; };
 		57DCF3461F7DE16A00B06E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */; };
 		57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3471F7DE16A00B06E7C /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepFitTabBarController.swift; sourceTree = "<group>"; };
+		576863BA1F7F6CCF00BA85DD /* Transitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitioning.swift; sourceTree = "<group>"; };
 		5775C61D1F7E0D920002E2F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetectController.swift; sourceTree = "<group>"; };
 		57DCF3421F7DE16A00B06E7C /* KeepFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +116,8 @@
 				57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */,
 				57DCF3471F7DE16A00B06E7C /* ViewController.swift */,
 				577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */,
+				576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */,
+				576863BA1F7F6CCF00BA85DD /* Transitioning.swift */,
 				57DCF3511F7DE16A00B06E7C /* Info.plist */,
 				57DCF3731F7DE1FD00B06E7C /* supporting files */,
 			);
@@ -286,7 +292,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */,
 				57DCF3791F7DE98000B06E7C /* Inceptionv3.mlmodel in Sources */,
+				576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */,
 				57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */,
 				577F3E891F7E38A90093A6E7 /* FoodDetectController.swift in Sources */,
 				57DCF3461F7DE16A00B06E7C /* AppDelegate.swift in Sources */,

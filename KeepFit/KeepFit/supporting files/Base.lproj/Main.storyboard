@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="-1026" y="-833"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Keep Fit Tab Bar Controller-->
         <scene sceneID="VKJ-dT-R7f">
             <objects>
-                <tabBarController id="Idb-As-CUe" sceneMemberID="viewController">
+                <tabBarController id="Idb-As-CUe" customClass="KeepFitTabBarController" customModule="KeepFit" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ejp-hd-UD0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
