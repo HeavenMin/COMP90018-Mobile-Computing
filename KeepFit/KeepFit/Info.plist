@@ -24,8 +24,10 @@
 	<string>LaunchScreen</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pick photo to do the detection.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Add the photo you take in the app.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Take pohoto to do the detection.</string>
+	<string>Take photo to do the detection.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

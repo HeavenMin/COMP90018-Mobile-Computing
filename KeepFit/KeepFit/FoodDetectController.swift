@@ -42,7 +42,7 @@ class FoodDetectController: UIViewController {
 //        }
 //        detectScene(image: ciImage)
         prediction.text = "Prediction"
-        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture of a food from your Camera."
+        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
         
     }
     
@@ -55,7 +55,7 @@ class FoodDetectController: UIViewController {
         }
         photoScene.image = image
         prediction.text = "Prediction"
-        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture of a food from your Camera."
+        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
         
     }
     
@@ -78,12 +78,12 @@ extension FoodDetectController {
     
     //old function for chooes the ImageSheet by one button
     @IBAction func getImage(_ sender: Any) {
+        
         // old method
         //        let pickerController = UIImagePickerController()
         //        pickerController.delegate = self
         //        pickerController.sourceType = .savedPhotosAlbum
         //        present(pickerController, animated: true)
-        
         chooseImageSheet()
         
     }
@@ -128,12 +128,17 @@ extension FoodDetectController {
         })
         
     }
+    
 }
 
 extension FoodDetectController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
+            
+            if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                UIImageWriteToSavedPhotosAlbum(origImage, nil, nil, nil)
+            }
             
             if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
                 self.photoScene.image = image
@@ -157,7 +162,7 @@ extension FoodDetectController {
     
     //funciton for make the detection
     func detectScene(image: CIImage) {
-        prediction.text = "Detecting your food..."
+        prediction.text = "Detecting..."
         foodInformation.text = "Loading your food information..."
         
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
