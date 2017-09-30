@@ -37,6 +37,19 @@ class FoodDetectController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //init image in screen
+        guard let image = UIImage(named: "scene") else {
+            fatalError("No starting image")
+        }
+        photoScene.image = image
+        prediction.text = "Prediction"
+        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture of a food from your Camera."
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
