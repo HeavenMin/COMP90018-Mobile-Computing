@@ -17,6 +17,7 @@ class FoodDetectController: UIViewController {
     @IBOutlet weak var photoScene: UIImageView!
     //The prediciton label
     @IBOutlet weak var prediction: UILabel!
+    @IBOutlet weak var foodInformation: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,8 @@ class FoodDetectController: UIViewController {
 //            fatalError("Couldn't convert UIImage to CIImage")
 //        }
 //        detectScene(image: ciImage)
-        prediction.text = "Please choose a food you want to add form Photo Library or Camera."
+        prediction.text = "Prediction"
+        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture of a food from your Camera."
         
     }
     
@@ -124,7 +126,8 @@ extension FoodDetectController {
     
     //funciton for make the detection
     func detectScene(image: CIImage) {
-        prediction.text = "Detecting your fooding..."
+        prediction.text = "Detecting your food ING..."
+        foodInformation.text = "Detecting your food ING..."
         
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
             fatalError("Can't load the ML model.")
@@ -138,7 +141,8 @@ extension FoodDetectController {
             
             //let article = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
             DispatchQueue.main.async { [weak self] in
-                self?.prediction.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier)"
+                self?.prediction.text = "\(topResult.identifier)"
+                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier)"
             }
         }
         
