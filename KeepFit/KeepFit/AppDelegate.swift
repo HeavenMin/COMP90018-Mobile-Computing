@@ -12,23 +12,29 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    //test for Azure
+    //Azure client
     var client: MSClient?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //test for Azure**********
+        //init Azure, create the client
         self.client = MSClient(
             applicationURLString:"https://keepfitcloud.azurewebsites.net"
         )
-
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let client = delegate.client!
-        let item = ["text":"Awesome item"]
-        let itemTable = client.table(withName: "TodoItem")
-        itemTable.insert(item)
+        
+        //test for Azure********** do not use if you are not test for azure
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let client = delegate.client!
+//        let item = ["text":"test2"]
+//        let itemTable = client.table(withName: "TodoItem")
+//        itemTable.insert(item) { (result, error) in
+//            if let err = error {
+//                print("ERROR ", err)
+//            } else if let item = result {
+//                print("Todo Item: ", item["text"]!)
+//            }
+//        }
         //*************************
         
         return true

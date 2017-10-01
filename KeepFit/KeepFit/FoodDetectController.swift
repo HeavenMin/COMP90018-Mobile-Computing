@@ -136,8 +136,11 @@ extension FoodDetectController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
             
-            if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                UIImageWriteToSavedPhotosAlbum(origImage, nil, nil, nil)
+            //if image was taked from camera, save it to photo album
+            if (picker.sourceType == .camera) {
+                if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    UIImageWriteToSavedPhotosAlbum(origImage, nil, nil, nil)
+                }
             }
             
             if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
@@ -180,7 +183,10 @@ extension FoodDetectController {
             DispatchQueue.main.async { [weak self] in
                 //get the first predict result in the top result
                 self?.prediction.text = "\(topResult.identifier.components(separatedBy: ",")[0])"
-                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier)"
+//                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(FoodDatabaseAzureOperation().queryForCal(food_name: topResult.identifier.components(separatedBy: ",")[0]))"
+                FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
+                    self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(kcal)"
+                }
             }
         }
         

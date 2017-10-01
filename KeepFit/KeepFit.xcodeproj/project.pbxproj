@@ -15,6 +15,7 @@
 		57B0B87B1F80793C004111D9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87A1F80793C004111D9 /* WebKit.framework */; };
 		57B0B87D1F807954004111D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87C1F807954004111D9 /* Security.framework */; };
 		57B0B87F1F80795E004111D9 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87E1F80795E004111D9 /* SafariServices.framework */; };
+		57B0B8811F80E114004111D9 /* FoodDatabaseAzureOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0B8801F80E114004111D9 /* FoodDatabaseAzureOperation.swift */; };
 		57DCF3461F7DE16A00B06E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */; };
 		57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3471F7DE16A00B06E7C /* ViewController.swift */; };
 		57DCF34B1F7DE16A00B06E7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57DCF3491F7DE16A00B06E7C /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		57B0B87A1F80793C004111D9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		57B0B87C1F807954004111D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		57B0B87E1F80795E004111D9 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		57B0B8801F80E114004111D9 /* FoodDatabaseAzureOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDatabaseAzureOperation.swift; sourceTree = "<group>"; };
 		57DCF3421F7DE16A00B06E7C /* KeepFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57DCF3471F7DE16A00B06E7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */,
 				57DCF3471F7DE16A00B06E7C /* ViewController.swift */,
 				577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */,
+				57B0B8801F80E114004111D9 /* FoodDatabaseAzureOperation.swift */,
 				576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */,
 				576863BA1F7F6CCF00BA85DD /* Transitioning.swift */,
 				57DCF3511F7DE16A00B06E7C /* Info.plist */,
@@ -310,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B0B8811F80E114004111D9 /* FoodDatabaseAzureOperation.swift in Sources */,
 				576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */,
 				57DCF3791F7DE98000B06E7C /* Inceptionv3.mlmodel in Sources */,
 				576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */,
