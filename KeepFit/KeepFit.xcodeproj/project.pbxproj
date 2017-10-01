@@ -11,6 +11,10 @@
 		576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */; };
 		576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863BA1F7F6CCF00BA85DD /* Transitioning.swift */; };
 		577F3E891F7E38A90093A6E7 /* FoodDetectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */; };
+		57B0B8751F80637E004111D9 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B8711F80607F004111D9 /* MicrosoftAzureMobile.framework */; };
+		57B0B87B1F80793C004111D9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87A1F80793C004111D9 /* WebKit.framework */; };
+		57B0B87D1F807954004111D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87C1F807954004111D9 /* Security.framework */; };
+		57B0B87F1F80795E004111D9 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87E1F80795E004111D9 /* SafariServices.framework */; };
 		57DCF3461F7DE16A00B06E7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */; };
 		57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3471F7DE16A00B06E7C /* ViewController.swift */; };
 		57DCF34B1F7DE16A00B06E7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57DCF3491F7DE16A00B06E7C /* Main.storyboard */; };
@@ -42,6 +46,11 @@
 		576863BA1F7F6CCF00BA85DD /* Transitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitioning.swift; sourceTree = "<group>"; };
 		5775C61D1F7E0D920002E2F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetectController.swift; sourceTree = "<group>"; };
+		57B0B8711F80607F004111D9 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
+		57B0B8791F8066FD004111D9 /* KeepFit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KeepFit-Bridging-Header.h"; sourceTree = "<group>"; };
+		57B0B87A1F80793C004111D9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		57B0B87C1F807954004111D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		57B0B87E1F80795E004111D9 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		57DCF3421F7DE16A00B06E7C /* KeepFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57DCF3471F7DE16A00B06E7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +71,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B0B87F1F80795E004111D9 /* SafariServices.framework in Frameworks */,
+				57B0B87D1F807954004111D9 /* Security.framework in Frameworks */,
+				57B0B87B1F80793C004111D9 /* WebKit.framework in Frameworks */,
+				57B0B8751F80637E004111D9 /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +98,10 @@
 		5775C61E1F7E0DE20002E2F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57B0B87E1F80795E004111D9 /* SafariServices.framework */,
+				57B0B87C1F807954004111D9 /* Security.framework */,
+				57B0B87A1F80793C004111D9 /* WebKit.framework */,
+				57B0B8711F80607F004111D9 /* MicrosoftAzureMobile.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +137,7 @@
 				576863BA1F7F6CCF00BA85DD /* Transitioning.swift */,
 				57DCF3511F7DE16A00B06E7C /* Info.plist */,
 				57DCF3731F7DE1FD00B06E7C /* supporting files */,
+				57B0B8791F8066FD004111D9 /* KeepFit-Bridging-Header.h */,
 			);
 			path = KeepFit;
 			sourceTree = "<group>";
@@ -465,10 +483,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6AJ8HGSG5F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KeepFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HeavenMin.KeepFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KeepFit/KeepFit-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -480,10 +504,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6AJ8HGSG5F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KeepFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HeavenMin.KeepFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KeepFit/KeepFit-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
