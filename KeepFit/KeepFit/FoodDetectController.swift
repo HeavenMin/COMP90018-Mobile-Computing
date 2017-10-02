@@ -19,7 +19,7 @@ class FoodDetectController: UIViewController {
     @IBOutlet weak var prediction: UILabel!
     @IBOutlet weak var foodInformation: UITextView!
     @IBOutlet weak var recommend_sign: UIImageView!
-    
+    var canUpdateFoodInfo: Bool = false
     
     let vowels: [Character] = ["a", "e", "i", "o", "u"]
     
@@ -60,6 +60,7 @@ class FoodDetectController: UIViewController {
         prediction.text = "Prediction"
         foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
         recommend_sign.image = nil
+        canUpdateFoodInfo = false
         
     }
     
@@ -165,6 +166,14 @@ extension FoodDetectController {
         let cancelAction = UIAlertAction(
             title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
         
+        let warnController = UIAlertController(
+            title: "Warning",
+            message: "Only a food without calorie infomation can be added to the database.",
+            preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(
+            title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        
         alertController.addTextField {
             (kcal_txt) -> Void in
             kcalTextField = kcal_txt
@@ -174,7 +183,12 @@ extension FoodDetectController {
         
         if (self.prediction.text == "Prediction") {
             print("Can not open alertController without a prediciton.")
-            foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera before you add the food calorie infomation. Only a food without calorie infomation can be added to the database."
+            foodInformation.text = "Before you help to add the food calorie infomation, please choose a food you want to recognize form Photo Library or take a picture from your Camera. Only a food without calorie infomation can be added to the database."
+        } else if (self.canUpdateFoodInfo == false) {
+            print("Can not open alertController without a prediciton.")
+//            foodInformation.text = "Only a food without calorie infomation can be added to the database."
+            warnController.addAction(okAction)
+            self.present(warnController, animated: true, completion: nil)
         } else {
             alertController.addAction(insertFoodInfoAction)
             alertController.addAction(cancelAction)
@@ -248,11 +262,17 @@ extension FoodDetectController {
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 80)
                         self?.recommend_sign.image = UIImage(named: "recommand_new")
                     } else {
-                        advice = "Not recommand to eat."
+                        advice = "Not recommand to eat a lot."
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 56)
                         self?.recommend_sign.image = UIImage(named: "not_recommand_new")
                     }
-                    self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier). The calorie of this food is \(kcal) kcal.\n\(advice)"
+                    if (kcal != -1) {
+                        self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier.components(separatedBy: ",")[0]). The calorie of this food is \(kcal) kcal.\n\(advice)"
+                        self?.canUpdateFoodInfo = false
+                    } else {
+                        self?.foodInformation.text = "It's not a food, or its data is not included. If you want to help us improve the database. Please click the button (+) to help us."
+                        self?.canUpdateFoodInfo = true
+                    }
                 }
             }
         }
