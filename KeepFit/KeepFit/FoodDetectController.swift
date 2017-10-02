@@ -18,6 +18,8 @@ class FoodDetectController: UIViewController {
     //The prediciton label
     @IBOutlet weak var prediction: UILabel!
     @IBOutlet weak var foodInformation: UITextView!
+    @IBOutlet weak var recommend_sign: UIImageView!
+    
     
     let vowels: [Character] = ["a", "e", "i", "o", "u"]
     
@@ -57,6 +59,7 @@ class FoodDetectController: UIViewController {
         photoScene.image = image
         prediction.text = "Prediction"
         foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
+        recommend_sign.image = nil
         
     }
     
@@ -170,7 +173,8 @@ extension FoodDetectController {
         }
         
         if (self.prediction.text == "Prediction") {
-            print("can not open alertController")
+            print("Can not open alertController without a prediciton.")
+            foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera before you add the food calorie infomation. Only a food without calorie infomation can be added to the database."
         } else {
             alertController.addAction(insertFoodInfoAction)
             alertController.addAction(cancelAction)
@@ -238,7 +242,17 @@ extension FoodDetectController {
 //                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(FoodDatabaseAzureOperation().queryForCal(food_name: topResult.identifier.components(separatedBy: ",")[0]))"
                 FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
                     // Int(topResult.confidence * 100) to show the confidence, not in use now.
-                    self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier). The calorie of this food is \(kcal) kcal."
+                    var advice: String
+                    if (kcal <= 400) {
+                        advice = "Recommand to eat."
+                        self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 80)
+                        self?.recommend_sign.image = UIImage(named: "recommand_new")
+                    } else {
+                        advice = "Not recommand to eat."
+                        self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 56)
+                        self?.recommend_sign.image = UIImage(named: "not_recommand_new")
+                    }
+                    self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier). The calorie of this food is \(kcal) kcal.\n\(advice)"
                 }
             }
         }
