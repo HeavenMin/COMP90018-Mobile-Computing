@@ -8,6 +8,7 @@
 
 import UIKit
 
+//old viewController, not in use now
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

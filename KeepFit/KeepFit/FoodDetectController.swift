@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//IOS machine learning framework
+//IOS foundational machine learning framework
 import CoreML
 import Vision
 
@@ -19,24 +19,25 @@ class FoodDetectController: UIViewController {
     @IBOutlet weak var prediction: UILabel!
     @IBOutlet weak var foodInformation: UITextView!
     
+    let vowels: [Character] = ["a", "e", "i", "o", "u"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //switch view with gestures
-//        let left = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
-//        left.direction = .left
-//        self.view.addGestureRecognizer(left)
-//
-//        let right = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
-//        right.direction = .right
-//        self.view.addGestureRecognizer(right)
+        let left = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+        left.direction = .left
+        self.view.addGestureRecognizer(left)
+        let right = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
+        right.direction = .right
+        self.view.addGestureRecognizer(right)
         
         //init image in screen
         guard let image = UIImage(named: "scene") else {
             fatalError("No starting image")
         }
         photoScene.image = image
-        //CIImage using for COreML
+        //CIImage using for COreML, no need to predict when start this view
 //        guard let ciImage = CIImage(image: image) else {
 //            fatalError("Couldn't convert UIImage to CIImage")
 //        }
@@ -74,17 +75,19 @@ class FoodDetectController: UIViewController {
     
 }
 
+//button part
 extension FoodDetectController {
     
     //old function for chooes the ImageSheet by one button
     @IBAction func getImage(_ sender: Any) {
+        
+        chooseImageSheet()
         
         // old method
         //        let pickerController = UIImagePickerController()
         //        pickerController.delegate = self
         //        pickerController.sourceType = .savedPhotosAlbum
         //        present(pickerController, animated: true)
-        chooseImageSheet()
         
     }
     
@@ -106,10 +109,12 @@ extension FoodDetectController {
         
     }
     
+    //button for get image from camera
     @IBAction func getImageFromCamera(_ sender: Any) {
         self.showImagePickerForSourceType(.camera)
     }
     
+    //button for get image from photo library
     @IBAction func getImageFromPhotoLibrary(_ sender: Any) {
         self.showImagePickerForSourceType(.photoLibrary)
     }
@@ -129,8 +134,54 @@ extension FoodDetectController {
         
     }
     
+    //for admin to update foodInfo, insert the calorie info to the azure database server
+    @IBAction func addFoodInfo_admin(_ sender: Any) {
+        var kcalTextField: UITextField?
+        
+        let alertController = UIAlertController(
+            title: "Food Info",
+            message: "Please enter the kcal of the \(prediction.text!).",
+            preferredStyle: UIAlertControllerStyle.alert)
+        
+        let insertFoodInfoAction = UIAlertAction(
+            title: "OK", style: UIAlertActionStyle.default) {
+            (action) -> Void in
+            
+            if let kcal = kcalTextField?.text {
+                print("kcal = \(kcal)")
+                if (kcal != "") {
+                    FoodDatabaseAzureOperation().insert(food_name: self.prediction.text!, kcal: Int(kcal)!)
+                } else {
+                    print("can not insert info without a number.")
+                }
+            } else {
+                print("No calorie infomation entered.")
+            }
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        alertController.addTextField {
+            (kcal_txt) -> Void in
+            kcalTextField = kcal_txt
+            kcalTextField!.placeholder = "enter kcal here"
+            kcalTextField?.keyboardType = UIKeyboardType.numberPad
+        }
+        
+        if (self.prediction.text == "Prediction") {
+            print("can not open alertController")
+        } else {
+            alertController.addAction(insertFoodInfoAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
 }
 
+//image picker part
 extension FoodDetectController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -161,12 +212,13 @@ extension FoodDetectController: UIImagePickerControllerDelegate {
 extension FoodDetectController: UINavigationControllerDelegate {
 }
 
+//food prediction part
 extension FoodDetectController {
     
     //funciton for make the detection
     func detectScene(image: CIImage) {
         prediction.text = "Detecting..."
-        foodInformation.text = "Loading your food information..."
+        foodInformation.text = "Loading your food information from the food database..."
         
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
             fatalError("Can't load the ML model.")
@@ -179,13 +231,14 @@ extension FoodDetectController {
             }
             
             //Originally used to distinguish vowel sounds
-            //let article = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
             DispatchQueue.main.async { [weak self] in
                 //get the first predict result in the top result
                 self?.prediction.text = "\(topResult.identifier.components(separatedBy: ",")[0])"
+                let an_or_a = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
 //                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(FoodDatabaseAzureOperation().queryForCal(food_name: topResult.identifier.components(separatedBy: ",")[0]))"
                 FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
-                    self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(kcal)"
+                    // Int(topResult.confidence * 100) to show the confidence, not in use now.
+                    self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier). The calorie of this food is \(kcal) kcal."
                 }
             }
         }

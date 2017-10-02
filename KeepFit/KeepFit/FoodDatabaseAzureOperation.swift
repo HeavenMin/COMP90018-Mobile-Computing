@@ -1,5 +1,5 @@
 //
-//  FoodDatabase.swift
+//  FoodDatabaseAzureOperation.swift
 //  KeepFit
 //
 //  Created by Min Gao on 2017/9/20.
@@ -45,7 +45,7 @@ class FoodDatabaseAzureOperation {
                 print("ERROR ", err)
             } else if let items = result?.items {
                 for item in items {
-                    print("Todo Item: ", item["kcal"]!)
+                    print("kcal of \(item["foodName"]!):", item["kcal"]!)
                     kcal = item["kcal"] as! Int
                 }
             }
@@ -57,7 +57,7 @@ class FoodDatabaseAzureOperation {
     func queryForKcal(food_name: String, completion: @escaping (_ kcal: Int) -> Void) {
         let predicate =  NSPredicate(format: "foodName == \"\(food_name)\"")
         
-        var kcal = 0
+        var kcal = -1
         
         itemTable?.read(with: predicate) { (result, error) in
             if let err = error {
@@ -65,11 +65,12 @@ class FoodDatabaseAzureOperation {
                 completion(kcal)
             } else if let items = result?.items {
                 for item in items {
-                    print("Todo Item: ", item["kcal"]!)
+                    print("kcal of \(item["foodName"]!):", item["kcal"]!)
                     kcal = item["kcal"] as! Int
                     completion(kcal)
                 }
             }
+            completion(kcal)
         }
         
     }
