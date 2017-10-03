@@ -257,14 +257,16 @@ extension FoodDetectController {
                 FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
                     // Int(topResult.confidence * 100) to show the confidence, not in use now.
                     var advice: String
-                    if (kcal <= 400) {
+                    if (kcal <= 400 && kcal >= 0) {
                         advice = "Recommand to eat."
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 80)
                         self?.recommend_sign.image = UIImage(named: "recommand_new")
-                    } else {
+                    } else if (kcal > 400) {
                         advice = "Not recommand to eat a lot."
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 56)
                         self?.recommend_sign.image = UIImage(named: "not_recommand_new")
+                    } else {
+                        advice = ""
                     }
                     if (kcal != -1) {
                         self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier.components(separatedBy: ",")[0]). The calorie of this food is \(kcal) kcal.\n\(advice)"
