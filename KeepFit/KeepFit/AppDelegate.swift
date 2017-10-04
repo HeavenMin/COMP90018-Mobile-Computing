@@ -14,6 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     //Azure client
     var client: MSClient?
+    
+    var isLogin:Bool
+    override init() {
+        self.isLogin = false
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.client = MSClient(
             applicationURLString:"https://keepfitcloud.azurewebsites.net"
         )
+//        self.isLogin = false
         
         //test for Azure********** do not use if you are not test for azure
 //        let delegate = UIApplication.shared.delegate as! AppDelegate
