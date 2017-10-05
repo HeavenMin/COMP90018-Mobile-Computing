@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var client: MSClient?
     
     var isLogin:Bool
+    var userName:String?
     override init() {
         self.isLogin = false
+        self.userName = nil
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

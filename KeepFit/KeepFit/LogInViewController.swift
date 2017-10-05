@@ -10,15 +10,9 @@ import Foundation
 import UIKit
 
 class ProfileViewController: ViewController {
-//    @IBOutlet weak var userName: UITextField!
-//    @IBOutlet weak var passWord: UITextField!
-//    @IBOutlet weak var passWordRepeat: UITextField!
-//    @IBOutlet weak var textInfo: UITextView!
-//
-//    var client: MSClient?
-//    var table :MSTable?
-//    var isSignUp = false
-//
+
+    @IBOutlet weak var userInfo: UILabel!
+    //
     override func viewDidLoad() {
 //        passWordRepeat.isHidden = true
 //        client = ((UIApplication.shared.delegate) as! AppDelegate).client!
@@ -29,6 +23,8 @@ class ProfileViewController: ViewController {
         if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LogInAndSignUp") as! LogInAndSignUp
             present(vc, animated: true, completion: nil)
+        }else{
+            userInfo.text = ((UIApplication.shared.delegate) as! AppDelegate).userName
         }
     }
 //
