@@ -39,36 +39,56 @@ class RunController: UIViewController{
         let artwork1 = Artwork(title: "Royal Park",
                               locationName: "Royal Park",
                               discipline: "Park",
-                              coordinate: CLLocationCoordinate2D(latitude: -37.7874401836, longitude: 144.950696197))
+                              coordinate: CLLocationCoordinate2D(latitude: -37.791109, longitude: 144.950984))
         let artwork2 = Artwork(title: "Lincoln Square",
                                locationName: "Lincoln Square",
-                               discipline: "Park",
-                               coordinate: CLLocationCoordinate2D(latitude: -37.80199, longitude: 144.96234))
+                               discipline: "Square",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.802411, longitude: 144.962851))
         let artwork3 = Artwork(title: "Argyle Square",
                                locationName: "Argyle Square",
-                               discipline: "Park",
-                               coordinate: CLLocationCoordinate2D(latitude: -37.80257, longitude: 144.96651))
+                               discipline: "Square",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.802729, longitude: 144.965783))
         let artwork4 = Artwork(title: "Carlton Garden",
                                locationName: "Melbourne Museum",
                                discipline: "Garden",
-                               coordinate: CLLocationCoordinate2D(latitude: -37.80280, longitude: 144.96942))
+                               coordinate: CLLocationCoordinate2D(latitude: -37.806252, longitude: 144.971147))
         let artwork5 = Artwork(title: "Alexandra Gardens",
                                locationName: "Alexandra Gardens",
                                discipline: "Garden",
-                               coordinate: CLLocationCoordinate2D(latitude: -37.72415, longitude: 144.73879))
+                               coordinate: CLLocationCoordinate2D(latitude: -37.820764, longitude: 144.972260))
         let artwork6 = Artwork(title: "University Square",
                                locationName: "University Square",
-                               discipline: "Park",
+                               discipline: "Square",
                                coordinate: CLLocationCoordinate2D(latitude: -37.801499, longitude: 144.960226))
-        
+        let artwork7 = Artwork(title: "Birrarung Marr",
+                               locationName: "Birrarung Marr",
+                               discipline: "Park",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.818169, longitude: 144.973210))
+        let artwork8 = Artwork(title: "Dockland",
+                               locationName: "DockLand",
+                               discipline: "Area",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.816434, longitude: 144.947652))
+        let artwork9 = Artwork(title: "Dockland Park",
+                               locationName: "Dockland Park",
+                               discipline: "Park",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.820600, longitude: 144.946620))
+        let artwork10 = Artwork(title: "Melbourne University Oval",
+                               locationName: "Melbourne University Oval",
+                               discipline: "Oval",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.794723, longitude: 144.961541))
         
         mapView.delegate = self
-        mapView.addAnnotation(artwork)
         mapView.addAnnotation(artwork1)
         mapView.addAnnotation(artwork2)
         mapView.addAnnotation(artwork3)
         mapView.addAnnotation(artwork4)
         mapView.addAnnotation(artwork5)
+        mapView.addAnnotation(artwork6)
+        mapView.addAnnotation(artwork7)
+        mapView.addAnnotation(artwork8)
+        mapView.addAnnotation(artwork9)
+        mapView.addAnnotation(artwork10)
+        
         
         
         // Do any additional setup after loading the view.
@@ -123,6 +143,7 @@ extension RunController: MKMapViewDelegate {
                 view.canShowCallout = true
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                view.pinColor = annotation.pinColor()
             }
             return view
         }
