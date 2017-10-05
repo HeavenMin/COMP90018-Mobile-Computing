@@ -33,7 +33,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="koR-vD-VdN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1026" y="700"/>
+            <point key="canvasLocation" x="-2884" y="-81"/>
         </scene>
         <!--Run-->
         <scene sceneID="CPl-9o-Ck5">
@@ -68,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZm-49-s6D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1026.4000000000001" y="-833.43328335832086"/>
+            <point key="canvasLocation" x="-1978" y="-784"/>
         </scene>
         <!--Keep Fit Tab Bar Controller-->
         <scene sceneID="VKJ-dT-R7f">
@@ -102,7 +102,19 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <items>
-                                    <navigationItem title="Food" id="g1n-ig-XqX"/>
+                                    <navigationItem title="Food" id="g1n-ig-XqX">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="settings70" id="b4I-9d-JsJ">
+                                            <inset key="imageInsets" minX="17" minY="2" maxX="0.0" maxY="0.0"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="scale" image="scale" id="V1w-5t-Amg">
+                                            <inset key="imageInsets" minX="0.0" minY="2" maxX="17" maxY="0.0"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="gotoScaleView:" destination="BYZ-38-t0r" id="01O-P1-nY8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5uf-qP-vT5" userLabel="background1">
@@ -166,6 +178,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Food" image="food" id="Nih-Rw-dab"/>
                     <connections>
+                        <outlet property="addfood_button" destination="PfR-gq-Tjc" id="42w-ht-rxn"/>
                         <outlet property="foodInformation" destination="Xgr-q1-4qM" id="4nU-85-TH3"/>
                         <outlet property="photoScene" destination="wux-eo-DOJ" id="6eq-TS-uJN"/>
                         <outlet property="prediction" destination="ztp-TH-TsC" id="iix-WC-WXf"/>
@@ -176,14 +189,63 @@
             </objects>
             <point key="canvasLocation" x="-1026.4000000000001" y="-81.409295352323838"/>
         </scene>
+        <!--Scale Controller-->
+        <scene sceneID="44Y-Hl-yCX">
+            <objects>
+                <viewController storyboardIdentifier="scale" id="kZ2-62-fLq" customClass="ScaleController" customModule="KeepFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A9y-BM-o4u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Spoon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="5Oz-Hr-mFA">
+                                <rect key="frame" x="0.0" y="269" width="375" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400 g" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCR-V8-Cpq">
+                                <rect key="frame" x="132" y="559" width="110" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgh-CW-Avl">
+                                <rect key="frame" x="16" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="close_black"/>
+                                <connections>
+                                    <action selector="close_button:" destination="kZ2-62-fLq" eventType="touchUpInside" id="sSp-gZ-D8Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYJ-Nz-MUe">
+                                <rect key="frame" x="319" y="25" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="help"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="HoW-u1-o4r"/>
+                    </view>
+                    <connections>
+                        <outlet property="weightLabel" destination="YCR-V8-Cpq" id="vyP-1o-Imi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vi2-Ps-kpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-356" y="-81"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Spoon_gray" width="399" height="398"/>
         <image name="camera" width="64" height="64"/>
+        <image name="close_black" width="50" height="50"/>
         <image name="food" width="30" height="30"/>
         <image name="greenPlus" width="264" height="264"/>
+        <image name="help" width="50" height="50"/>
         <image name="label_background" width="408" height="101"/>
         <image name="photo" width="64" height="64"/>
         <image name="profile" width="30" height="30"/>
         <image name="run_2" width="30" height="30"/>
+        <image name="scale" width="23" height="23"/>
+        <image name="settings70" width="23" height="23"/>
     </resources>
 </document>

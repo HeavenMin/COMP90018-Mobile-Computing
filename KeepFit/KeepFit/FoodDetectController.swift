@@ -19,6 +19,8 @@ class FoodDetectController: UIViewController {
     @IBOutlet weak var prediction: UILabel!
     @IBOutlet weak var foodInformation: UITextView!
     @IBOutlet weak var recommend_sign: UIImageView!
+    @IBOutlet weak var addfood_button: UIButton!
+    
     var canUpdateFoodInfo: Bool = false
     
     let vowels: [Character] = ["a", "e", "i", "o", "u"]
@@ -46,6 +48,7 @@ class FoodDetectController: UIViewController {
 //        detectScene(image: ciImage)
         prediction.text = "Prediction"
         foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
+        addfood_button.isEnabled = false
         
     }
     
@@ -53,14 +56,15 @@ class FoodDetectController: UIViewController {
         super.viewWillAppear(animated)
         
         //init image in screen
-        guard let image = UIImage(named: "scene") else {
-            fatalError("No starting image")
-        }
-        photoScene.image = image
-        prediction.text = "Prediction"
-        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
-        recommend_sign.image = nil
-        canUpdateFoodInfo = false
+//        guard let image = UIImage(named: "scene") else {
+//            fatalError("No starting image")
+//        }
+//        photoScene.image = image
+//        prediction.text = "Prediction"
+//        foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
+//        recommend_sign.image = nil
+//        canUpdateFoodInfo = false
+//        addfood_button.isEnabled = false
         
     }
     
@@ -154,7 +158,16 @@ extension FoodDetectController {
             if let kcal = kcalTextField?.text {
                 print("kcal = \(kcal)")
                 if (kcal != "") {
-                    FoodDatabaseAzureOperation().insert(food_name: self.prediction.text!, kcal: Int(kcal)!)
+//                    FoodDatabaseAzureOperation().insert(food_name: self.prediction.text!, kcal: Int(kcal)!)
+                    
+                    FoodDatabaseAzureOperation().insertKcal(food_name: self.prediction.text!, kcal: Int(kcal)!){(success: Bool) -> Void in
+                        if (success) {
+                            self.foodInformation.text = "Uploading Calorie infomation of \(self.prediction.text!) succeeded."
+                        } else {
+                            self.foodInformation.text = "Uploading calorie infomation of \(self.prediction.text!) failed, please try again."
+                        }
+                        
+                    }
                 } else {
                     print("can not insert info without a number.")
                 }
@@ -197,6 +210,21 @@ extension FoodDetectController {
         
     }
     
+    //jump to the scale view {Fade Push Reveal MoveIn}
+    @IBAction func gotoScaleView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let scaleView = storyboard.instantiateViewController(withIdentifier: "scale") as UIViewController
+        
+//        let transition = CATransition()
+//        transition.duration = 0.2
+//        transition.type = kCATransitionPush
+//        transition.subtype = kCATransitionFromBottom
+//        view.window!.layer.add(transition, forKey: kCATransition)
+//        self.present(scaleView, animated: false, completion: nil)
+        
+        self.present(scaleView, animated: true, completion: nil)
+    }
+    
 }
 
 //image picker part
@@ -204,6 +232,10 @@ extension FoodDetectController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true) {
+            
+            //after select the image, disable the update button first.
+            self.canUpdateFoodInfo = false
+            self.addfood_button.isEnabled = false
             
             //if image was taked from camera, save it to photo album
             if (picker.sourceType == .camera) {
@@ -235,6 +267,7 @@ extension FoodDetectController {
     
     //funciton for make the detection
     func detectScene(image: CIImage) {
+        
         prediction.text = "Detecting..."
         foodInformation.text = "Loading your food information from the food database..."
         
@@ -253,15 +286,16 @@ extension FoodDetectController {
                 //get the first predict result in the top result
                 self?.prediction.text = "\(topResult.identifier.components(separatedBy: ",")[0])"
                 let an_or_a = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
+                
 //                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(FoodDatabaseAzureOperation().queryForCal(food_name: topResult.identifier.components(separatedBy: ",")[0]))"
                 FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
                     // Int(topResult.confidence * 100) to show the confidence, not in use now.
                     var advice: String
-                    if (kcal <= 400 && kcal >= 0) {
+                    if (kcal <= 350 && kcal >= 0) {
                         advice = "Recommand to eat."
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 80)
                         self?.recommend_sign.image = UIImage(named: "recommand_new")
-                    } else if (kcal > 400) {
+                    } else if (kcal > 350) {
                         advice = "Not recommand to eat a lot."
                         self?.recommend_sign.frame = CGRect(x: 289, y: 64, width: 70, height: 56)
                         self?.recommend_sign.image = UIImage(named: "not_recommand_new")
@@ -270,10 +304,10 @@ extension FoodDetectController {
                     }
                     if (kcal != -1) {
                         self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier.components(separatedBy: ",")[0]). The calorie of this food is \(kcal) kcal.\n\(advice)"
-                        self?.canUpdateFoodInfo = false
                     } else {
                         self?.foodInformation.text = "It's not a food, or its data is not included. If you want to help us improve the database. Please click the button (+) to help us."
                         self?.canUpdateFoodInfo = true
+                        self?.addfood_button.isEnabled = true
                     }
                 }
             }

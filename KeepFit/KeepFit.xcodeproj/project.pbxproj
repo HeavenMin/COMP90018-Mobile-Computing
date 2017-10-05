@@ -10,6 +10,7 @@
 		571891341F7E0EFD009EFDB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5775C61D1F7E0D920002E2F9 /* Assets.xcassets */; };
 		576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */; };
 		576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576863BA1F7F6CCF00BA85DD /* Transitioning.swift */; };
+		5775B28A1F83C877004BF8CC /* ScaleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5775B2891F83C877004BF8CC /* ScaleController.swift */; };
 		577F3E891F7E38A90093A6E7 /* FoodDetectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */; };
 		57B0B8751F80637E004111D9 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B8711F80607F004111D9 /* MicrosoftAzureMobile.framework */; };
 		57B0B87B1F80793C004111D9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0B87A1F80793C004111D9 /* WebKit.framework */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepFitTabBarController.swift; sourceTree = "<group>"; };
 		576863BA1F7F6CCF00BA85DD /* Transitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitioning.swift; sourceTree = "<group>"; };
+		5775B2891F83C877004BF8CC /* ScaleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleController.swift; sourceTree = "<group>"; };
 		5775C61D1F7E0D920002E2F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetectController.swift; sourceTree = "<group>"; };
 		57B0B8711F80607F004111D9 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				57B0B8801F80E114004111D9 /* FoodDatabaseAzureOperation.swift */,
 				576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */,
 				576863BA1F7F6CCF00BA85DD /* Transitioning.swift */,
+				5775B2891F83C877004BF8CC /* ScaleController.swift */,
 				57DCF3511F7DE16A00B06E7C /* Info.plist */,
 				57DCF3731F7DE1FD00B06E7C /* supporting files */,
 				57B0B8791F8066FD004111D9 /* KeepFit-Bridging-Header.h */,
@@ -317,6 +320,7 @@
 				576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */,
 				57DCF3791F7DE98000B06E7C /* Inceptionv3.mlmodel in Sources */,
 				576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */,
+				5775B28A1F83C877004BF8CC /* ScaleController.swift in Sources */,
 				57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */,
 				577F3E891F7E38A90093A6E7 /* FoodDetectController.swift in Sources */,
 				57DCF3461F7DE16A00B06E7C /* AppDelegate.swift in Sources */,
