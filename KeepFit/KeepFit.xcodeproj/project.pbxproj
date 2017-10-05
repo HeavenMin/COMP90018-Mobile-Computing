@@ -24,6 +24,9 @@
 		57DCF35B1F7DE16A00B06E7C /* KeepFitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF35A1F7DE16A00B06E7C /* KeepFitTests.swift */; };
 		57DCF3661F7DE16A00B06E7C /* KeepFitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3651F7DE16A00B06E7C /* KeepFitUITests.swift */; };
 		57DCF3791F7DE98000B06E7C /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 57DCF3761F7DE83900B06E7C /* Inceptionv3.mlmodel */; };
+		DFC6F52C1F85DDDB007DDAF4 /* RunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC6F52B1F85DDDB007DDAF4 /* RunController.swift */; };
+		DFC6F52E1F85E11F007DDAF4 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC6F52D1F85E11F007DDAF4 /* Artwork.swift */; };
+		DFC6F5301F85E1AA007DDAF4 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC6F52F1F85E1AA007DDAF4 /* VCMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,9 @@
 		57DCF3651F7DE16A00B06E7C /* KeepFitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepFitUITests.swift; sourceTree = "<group>"; };
 		57DCF3671F7DE16A00B06E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57DCF3761F7DE83900B06E7C /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		DFC6F52B1F85DDDB007DDAF4 /* RunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunController.swift; sourceTree = "<group>"; };
+		DFC6F52D1F85E11F007DDAF4 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		DFC6F52F1F85E1AA007DDAF4 /* VCMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,9 @@
 			children = (
 				57DCF3451F7DE16A00B06E7C /* AppDelegate.swift */,
 				57DCF3471F7DE16A00B06E7C /* ViewController.swift */,
+				DFC6F52B1F85DDDB007DDAF4 /* RunController.swift */,
+				DFC6F52D1F85E11F007DDAF4 /* Artwork.swift */,
+				DFC6F52F1F85E1AA007DDAF4 /* VCMapView.swift */,
 				577F3E881F7E38A90093A6E7 /* FoodDetectController.swift */,
 				57B0B8801F80E114004111D9 /* FoodDatabaseAzureOperation.swift */,
 				576863B81F7F6B2500BA85DD /* KeepFitTabBarController.swift */,
@@ -316,9 +325,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC6F52E1F85E11F007DDAF4 /* Artwork.swift in Sources */,
 				57B0B8811F80E114004111D9 /* FoodDatabaseAzureOperation.swift in Sources */,
 				576863BB1F7F6CCF00BA85DD /* Transitioning.swift in Sources */,
 				57DCF3791F7DE98000B06E7C /* Inceptionv3.mlmodel in Sources */,
+				DFC6F5301F85E1AA007DDAF4 /* VCMapView.swift in Sources */,
+				DFC6F52C1F85DDDB007DDAF4 /* RunController.swift in Sources */,
 				576863B91F7F6B2500BA85DD /* KeepFitTabBarController.swift in Sources */,
 				5775B28A1F83C877004BF8CC /* ScaleController.swift in Sources */,
 				57DCF3481F7DE16A00B06E7C /* ViewController.swift in Sources */,
@@ -490,7 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6AJ8HGSG5F;
+				DEVELOPMENT_TEAM = GS4XAQ6DWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -511,7 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6AJ8HGSG5F;
+				DEVELOPMENT_TEAM = GS4XAQ6DWS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
