@@ -14,6 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     //Azure client
     var client: MSClient?
+    var isLogin:Bool
+    var userName:String?
+    override init() {
+        self.isLogin = false
+        self.userName = nil
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
