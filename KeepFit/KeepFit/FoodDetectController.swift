@@ -301,6 +301,7 @@ extension FoodDetectController {
                         self?.recommend_sign.image = UIImage(named: "not_recommand_new")
                     } else {
                         advice = ""
+                        self?.recommend_sign.image = nil
                     }
                     if (kcal != -1) {
                         self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier.components(separatedBy: ",")[0]). The calorie of this food is \(kcal) kcal.\n\(advice)"

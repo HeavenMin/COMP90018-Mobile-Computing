@@ -10,8 +10,7 @@ import UIKit
 import MapKit
 
 class RunController: UIViewController{
-    
-    var mapView : MKMapView!
+    @IBOutlet weak var mapView: MKMapView!
     
     let initialLocation = CLLocation(latitude: -37.814251, longitude: 144.963169)
     
@@ -23,16 +22,9 @@ class RunController: UIViewController{
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    //initializaion of th map
-    func initMap() -> Void {
-        mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view.addSubview(mapView)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initMap()
         centerMapOnLocation(location: initialLocation)
         
         
