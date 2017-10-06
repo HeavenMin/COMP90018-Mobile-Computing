@@ -24,6 +24,10 @@ class LogInAndSignUp: ViewController {
     }
 }
 class LogInViewController:ViewController{
+    
+    override func viewDidLoad() {
+        passWord.isSecureTextEntry = true
+    }
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var alertText: UITextView!
     @IBOutlet weak var passWord: UITextField!
@@ -64,6 +68,11 @@ class LogInViewController:ViewController{
 }
 
 class SignUpViewController: ViewController {
+    
+    override func viewDidLoad() {
+        passWord.isSecureTextEntry = true
+        passWordRepeat.isSecureTextEntry = true
+    }
     
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var passWord: UITextField!
