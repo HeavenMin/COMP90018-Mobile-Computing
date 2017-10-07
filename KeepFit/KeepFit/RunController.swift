@@ -12,12 +12,11 @@ import MapKit
 class RunController: UIViewController,MKMapViewDelegate{
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var startAndResume: UIImageView!
-    @IBOutlet weak var pauseAndReset: UIImageView!
-    @IBOutlet var tap1: UITapGestureRecognizer!
-    @IBOutlet var tap2: UITapGestureRecognizer!
+    @IBOutlet weak var tap1: UIButton!
+    @IBOutlet weak var tap2: UIButton!
     
     let initialLocation = CLLocation(latitude: -37.814251, longitude: 144.963169)
+    
     
     // help functions to set the radius showed in the map
     let regionRadius: CLLocationDistance = 2000
@@ -34,10 +33,8 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         
         //enable image button
-        startAndResume.isUserInteractionEnabled = true
-        pauseAndReset.isUserInteractionEnabled = true
-        startAndResume.image = UIImage(named:"start_green")
-        pauseAndReset.image = UIImage(named:"stop_red")
+        tap1.setImage(UIImage(named:"start_green"), for: .normal)
+        tap2.setImage(UIImage(named:"stop_red"), for: .normal)
         tap1.isEnabled = true
         tap2.isEnabled = false
         
@@ -153,16 +150,25 @@ class RunController: UIViewController,MKMapViewDelegate{
         }
         return nil
     }
+    
+    var drawingMap = false
+    
+    var lastRoute : MKPolyline!
+    
+    var firstTime = true
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! Artwork
         
         let sourceLocation = locationManager.location!.coordinate
         let destinationLocation = location.location()
+        drawingMap = false
         drawPath(sourceLocation: sourceLocation,destinationLocation: destinationLocation)
         
 //        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
 //        location.mapItem().openInMaps(launchOptions: launchOptions)
     }
+
     
     func drawPath(sourceLocation:CLLocationCoordinate2D, destinationLocation:CLLocationCoordinate2D){
         let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
@@ -195,15 +201,32 @@ class RunController: UIViewController,MKMapViewDelegate{
             }
             
             let route = response.routes[0]
-            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            if(self.firstTime){
+                self.firstTime = false
+            }
+            else{
+                self.mapView.remove(self.lastRoute)
+            }
             
+            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            self.lastRoute = route.polyline
+            if (!self.drawingMap){
+                let rect = route.polyline.boundingMapRect
+                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            }
         }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
-        renderer.lineWidth = 3.0
+        if (!self.drawingMap){
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 3.0
+        }
+        else{
+            renderer.strokeColor = UIColor.red
+            renderer.lineWidth = 3.0
+        }
         return renderer
     }
     
@@ -228,8 +251,8 @@ class RunController: UIViewController,MKMapViewDelegate{
         if(isPlaying == 0) {
             tap1.isEnabled = false
             tap2.isEnabled = true
-            startAndResume.image = UIImage(named:"start_normal")
-            pauseAndReset.image = UIImage(named:"pause_catoon")
+            tap1.setImage(UIImage(named:"start_normal"), for: .normal)
+            tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
@@ -243,8 +266,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap2.isEnabled = true
                 isPlaying = 1
                 startPoint = locationManager.location!.coordinate
-                startAndResume.image = UIImage(named:"start_normal")
-                pauseAndReset.image = UIImage(named:"pause_catoon")
+                tap1.setImage(UIImage(named:"start_normal"), for: .normal)
+                tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
             }
         }
@@ -260,8 +283,9 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap2.isEnabled = true
                 timer.invalidate()
                 isPlaying = 2
-                startAndResume.image = UIImage(named:"start_cartoon")
-                pauseAndReset.image = UIImage(named:"stop_red")
+                
+                tap1.setImage(UIImage(named:"start_cartoon"), for: .normal)
+                tap2.setImage(UIImage(named:"stop_red"), for: .normal)
             }
             else{
                 tap1.isEnabled = true
@@ -270,8 +294,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 isPlaying = 0
                 counter = 0
                 timeLabel.text = String(" 0: 0: 0")
-                startAndResume.image = UIImage(named:"start_green")
-                pauseAndReset.image = UIImage(named:"stop_red")
+                tap1.setImage(UIImage(named:"start_green"), for: .normal)
+                tap2.setImage(UIImage(named:"stop_red"), for: .normal)
             }
         }
     }
@@ -287,6 +311,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
         //CLLocation(endPoint)
         startPoint = locationManager.location!.coordinate
+        drawingMap = true
     }
     
     
