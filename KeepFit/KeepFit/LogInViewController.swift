@@ -38,15 +38,17 @@ class ProfileViewController: ViewController {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LogInAndSignUp") as! LogInAndSignUp
             present(vc, animated: true, completion: nil)
         }else{
-            let logOutAlert = UIAlertController(title:"Log Out",message:"aaa",preferredStyle:UIAlertControllerStyle.alert)
-            let logOutAction = UIAlertAction(title:"OK",style: UIAlertActionStyle.cancel,handler:nil)
+            let logOutAlert = UIAlertController(title:"Log Out",message:"tap Ok to log out tap cancel to return",preferredStyle:UIAlertControllerStyle.alert)
+            let logOutAction = UIAlertAction(title:"OK",style: .default,handler:{
+                action in
+                ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
+                ((UIApplication.shared.delegate) as! AppDelegate).userName = ""
+                self.userInfo.text = "Visitor"
+            })
             let cancelAction = UIAlertAction(title:"cancel",style: UIAlertActionStyle.cancel,handler:nil)
             logOutAlert.addAction(logOutAction)
-//            logOutAlert.addAction(cancelAction)
+            logOutAlert.addAction(cancelAction)
             present(logOutAlert, animated: true, completion: nil)
-            ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
-            ((UIApplication.shared.delegate) as! AppDelegate).userName = ""
-            userInfo.text = "Visitor"
             
         }
     }
