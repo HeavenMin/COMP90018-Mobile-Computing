@@ -12,6 +12,7 @@ import MapKit
 class RunController: UIViewController,MKMapViewDelegate{
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var tap1: UIButton!
     @IBOutlet weak var tap2: UIButton!
     
@@ -42,9 +43,9 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         //pre set artworks show on the map
         let artwork1 = Artwork(title: "Royal Park",
-                              locationName: "Royal Park",
-                              discipline: "Park",
-                              coordinate: CLLocationCoordinate2D(latitude: -37.791109, longitude: 144.950984))
+                               locationName: "Royal Park",
+                               discipline: "Park",
+                               coordinate: CLLocationCoordinate2D(latitude: -37.791109, longitude: 144.950984))
         let artwork2 = Artwork(title: "Lincoln Square",
                                locationName: "Lincoln Square",
                                discipline: "Square",
@@ -78,9 +79,9 @@ class RunController: UIViewController,MKMapViewDelegate{
                                discipline: "Park",
                                coordinate: CLLocationCoordinate2D(latitude: -37.820600, longitude: 144.946620))
         let artwork10 = Artwork(title: "Melbourne University Oval",
-                               locationName: "Melbourne University Oval",
-                               discipline: "Oval",
-                               coordinate: CLLocationCoordinate2D(latitude: -37.794723, longitude: 144.961541))
+                                locationName: "Melbourne University Oval",
+                                discipline: "Oval",
+                                coordinate: CLLocationCoordinate2D(latitude: -37.794723, longitude: 144.961541))
         
         mapView.delegate = self
         mapView.addAnnotation(artwork1)
@@ -99,7 +100,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -118,7 +119,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         checkLocationAuthorizationStatus()
     }
     
-
+    
     
     
     // below part belongs to MKMapViewDelegate part
@@ -132,12 +133,12 @@ class RunController: UIViewController,MKMapViewDelegate{
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-//                // 3
-//                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//                view.canShowCallout = true
-//                view.calloutOffset = CGPoint(x: -5, y: 5)
-//                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-//                view.pinColor = annotation.pinColor()
+                //                // 3
+                //                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                //                view.canShowCallout = true
+                //                view.calloutOffset = CGPoint(x: -5, y: 5)
+                //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                //                view.pinColor = annotation.pinColor()
                 var imageView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 imageView.canShowCallout = true
                 imageView.calloutOffset = CGPoint(x: -5, y: 5)
@@ -165,10 +166,10 @@ class RunController: UIViewController,MKMapViewDelegate{
         drawingMap = false
         drawPath(sourceLocation: sourceLocation,destinationLocation: destinationLocation)
         
-//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
-//        location.mapItem().openInMaps(launchOptions: launchOptions)
+        //        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+        //        location.mapItem().openInMaps(launchOptions: launchOptions)
     }
-
+    
     
     func drawPath(sourceLocation:CLLocationCoordinate2D, destinationLocation:CLLocationCoordinate2D){
         let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
@@ -207,7 +208,6 @@ class RunController: UIViewController,MKMapViewDelegate{
             else{
                 self.mapView.remove(self.lastRoute)
             }
-            
             self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
             self.lastRoute = route.polyline
             if (!self.drawingMap){
@@ -221,11 +221,11 @@ class RunController: UIViewController,MKMapViewDelegate{
         let renderer = MKPolylineRenderer(overlay: overlay)
         if (!self.drawingMap){
             renderer.strokeColor = UIColor.blue
-            renderer.lineWidth = 3.0
+            renderer.lineWidth = 4.0
         }
         else{
             renderer.strokeColor = UIColor.red
-            renderer.lineWidth = 3.0
+            renderer.lineWidth = 2.0
         }
         return renderer
     }
@@ -245,7 +245,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     var isPlaying = 0
     var startPoint : CLLocationCoordinate2D!
     var endPoint : CLLocationCoordinate2D!
-    var distance = 0
+    var distance = 0.0
     
     
     @IBAction func startAndResume(_ sender: Any) {
@@ -256,6 +256,8 @@ class RunController: UIViewController,MKMapViewDelegate{
             tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
+            var resetRegion = MKCoordinateRegionMakeWithDistance(startPoint,300,300)
+            mapView.setRegion(resetRegion, animated: true)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         }
         else{
@@ -298,6 +300,10 @@ class RunController: UIViewController,MKMapViewDelegate{
                 timeLabel.text = String(" 0: 0: 0")
                 tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"stop_red"), for: .normal)
+                
+                
+                
+                distance = 0.0
             }
         }
     }
@@ -311,10 +317,24 @@ class RunController: UIViewController,MKMapViewDelegate{
         timeLabel.text = String(format: "%d:%d:%d",hour,minute,second)
         endPoint = locationManager.location!.coordinate
         drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
+        
         //CLLocation(endPoint)
         startPoint = locationManager.location!.coordinate
         drawingMap = true
+        
+        var locations = [CLLocation(latitude:startPoint.latitude,longitude:startPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
+        var coordinates = locations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
+        var polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
+        self.mapView.add(polyline, level: MKOverlayLevel.aboveRoads)
+        
+        var startPointCoordinate = CLLocation(latitude:startPoint.latitude,longitude: startPoint.longitude)
+        var endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
+        var shortDistance = startPointCoordinate.distance(from: endPointCoordinate)
+        distance = distance + shortDistance
+        distanceLabel.text = String(format:"%.2f meters",distance)
+        
     }
     
     
 }
+
