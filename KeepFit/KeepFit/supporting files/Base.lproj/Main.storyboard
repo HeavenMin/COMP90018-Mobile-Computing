@@ -147,12 +147,20 @@
                                     <action selector="startAndResume:" destination="GbN-Xg-nJK" eventType="touchUpInside" id="38w-xd-cbE"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgd-cM-lBP">
+                                <rect key="frame" x="275" y="469" width="11" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="XG6-fm-Nri"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Run" image="run_2" id="vsY-7X-y4a"/>
                     <connections>
+                        <outlet property="distanceLabel" destination="kgd-cM-lBP" id="jS7-oP-9Pd"/>
                         <outlet property="mapView" destination="OVL-Cq-2jh" id="tVw-yo-OhW"/>
                         <outlet property="tap1" destination="whb-kp-zml" id="X0f-gH-I4J"/>
                         <outlet property="tap2" destination="ebb-Kg-MHj" id="cyD-Go-DiW"/>
