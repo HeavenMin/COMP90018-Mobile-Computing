@@ -39,7 +39,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         startAndResume.image = UIImage(named:"start_green")
         pauseAndReset.image = UIImage(named:"stop_red")
         tap1.isEnabled = true
-        tap2.isEnabled = true
+        tap2.isEnabled = false
         
         
         
@@ -225,8 +225,11 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     @IBAction func startAndResumeTimer(_ sender: Any) {
         if(isPlaying == 0) {
+            tap1.isEnabled = false
+            tap2.isEnabled = true
             startAndResume.image = UIImage(named:"start_normal")
             pauseAndReset.image = UIImage(named:"pause_catoon")
+            isPlaying = 1
             startPoint = locationManager.location!.coordinate
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         }
@@ -235,6 +238,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 return
             }
             else{
+                tap1.isEnabled = false
+                tap2.isEnabled = true
                 isPlaying = 1
                 startPoint = locationManager.location!.coordinate
                 startAndResume.image = UIImage(named:"start_normal")
@@ -250,12 +255,16 @@ class RunController: UIViewController,MKMapViewDelegate{
         }
         else{
             if (isPlaying == 1){
+                tap1.isEnabled = true
+                tap2.isEnabled = true
                 timer.invalidate()
                 isPlaying = 2
                 startAndResume.image = UIImage(named:"start_cartoon")
                 pauseAndReset.image = UIImage(named:"stop_red")
             }
             else{
+                tap1.isEnabled = true
+                tap2.isEnabled = false
                 timer.invalidate()
                 isPlaying = 0
                 counter = 0
@@ -269,7 +278,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     @objc func UpdateTimer() {
         counter = counter + 1
-        let hour = counter % 3600
+        let hour = counter / 3600
         let minute = (counter % 3600)/60
         let second = counter % 60
         timeLabel.text = String(format: "%d:%d:%d",hour,minute,second)
