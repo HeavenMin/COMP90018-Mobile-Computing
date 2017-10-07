@@ -144,6 +144,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 var imageView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 imageView.canShowCallout = true
                 imageView.calloutOffset = CGPoint(x: -5, y: 5)
+                imageView.centerOffset = CGPoint(x:0,y:-30)
                 imageView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
                 imageView.image = annotation.iconImage
                 return imageView
@@ -268,7 +269,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 timer.invalidate()
                 isPlaying = 0
                 counter = 0
-                timeLabel.text = String(counter)
+                timeLabel.text = String(" 0: 0: 0")
                 startAndResume.image = UIImage(named:"start_green")
                 pauseAndReset.image = UIImage(named:"stop_red")
             }
