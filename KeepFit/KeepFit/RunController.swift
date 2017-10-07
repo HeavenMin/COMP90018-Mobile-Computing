@@ -301,7 +301,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"stop_red"), for: .normal)
                 
-                
+                let azureOperator = AzureOperation()
+                azureOperator.insertDistanceRecord(distance: distance)
                 
                 distance = 0.0
             }

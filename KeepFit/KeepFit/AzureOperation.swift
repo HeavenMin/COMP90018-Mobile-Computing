@@ -25,7 +25,7 @@ class AzureOperation {
         timeFormatter.dateFormat = "yyy-MM-dd"
         nowTime = timeFormatter.string(from: date)
     }
-    func insertDistanceRecord(distance:Float) {
+    func insertDistanceRecord(distance:Double) {
         let newItem = ["UserName":user_name, "RunRecord":"firstRun","Calorie":1000,"Distance":distance] as [String : Any]
         run_table?.insert(newItem) { (result, error) in
             if let err = error {
@@ -35,7 +35,7 @@ class AzureOperation {
             }
         }
     }
-    func insertFoodRecord(food_name:String,calorie:Float){
+    func insertFoodRecord(food_name:String,calorie:Double){
         let newItem = ["UserName":user_name, "FoodName":food_name,"Quantity":calorie] as [String : Any]
         calorie_table?.insert(newItem) { (result, error) in
             if let err = error {
