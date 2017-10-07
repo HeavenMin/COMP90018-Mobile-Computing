@@ -9,8 +9,13 @@
 import UIKit
 import MapKit
 
-class RunController: UIViewController{
+class RunController: UIViewController,MKMapViewDelegate{
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var startAndResume: UIImageView!
+    @IBOutlet weak var pauseAndReset: UIImageView!
+    @IBOutlet var tap1: UITapGestureRecognizer!
+    @IBOutlet var tap2: UITapGestureRecognizer!
     
     let initialLocation = CLLocation(latitude: -37.814251, longitude: 144.963169)
     
@@ -28,6 +33,17 @@ class RunController: UIViewController{
         centerMapOnLocation(location: initialLocation)
         
         
+        //enable image button
+        startAndResume.isUserInteractionEnabled = true
+        pauseAndReset.isUserInteractionEnabled = true
+        startAndResume.image = UIImage(named:"start_green")
+        pauseAndReset.image = UIImage(named:"stop_red")
+        tap1.isEnabled = true
+        tap2.isEnabled = false
+        
+        
+        
+        //pre set artworks show on the map
         let artwork1 = Artwork(title: "Royal Park",
                               locationName: "Royal Park",
                               discipline: "Park",
@@ -83,6 +99,7 @@ class RunController: UIViewController{
         
         
         
+        
         // Do any additional setup after loading the view.
     }
 
@@ -104,25 +121,13 @@ class RunController: UIViewController{
         checkLocationAuthorizationStatus()
     }
     
+
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension RunController: MKMapViewDelegate {
     
-    // 1
+    // below part belongs to MKMapViewDelegate part
     func mapView(_ mapView: MKMapView!, viewFor annotation: MKAnnotation!) -> MKAnnotationView! {
         if let annotation = annotation as? Artwork {
+            
             let identifier = "pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
@@ -130,22 +135,155 @@ extension RunController: MKMapViewDelegate {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                // 3
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-                view.pinColor = annotation.pinColor()
+//                // 3
+//                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//                view.canShowCallout = true
+//                view.calloutOffset = CGPoint(x: -5, y: 5)
+//                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+//                view.pinColor = annotation.pinColor()
+                var imageView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                imageView.canShowCallout = true
+                imageView.calloutOffset = CGPoint(x: -5, y: 5)
+                imageView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                imageView.image = annotation.iconImage
+                return imageView
             }
             return view
         }
         return nil
     }
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
-                 calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! Artwork
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
-        location.mapItem().openInMaps(launchOptions: launchOptions)
+        
+        let sourceLocation = locationManager.location!.coordinate
+        let destinationLocation = location.location()
+        drawPath(sourceLocation: sourceLocation,destinationLocation: destinationLocation)
+        
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+//        location.mapItem().openInMaps(launchOptions: launchOptions)
     }
+    
+    func drawPath(sourceLocation:CLLocationCoordinate2D, destinationLocation:CLLocationCoordinate2D){
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+        
+        //
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        
+        //
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
+        
+        // direction caculation
+        let directions = MKDirections(request: directionRequest)
+        
+        //
+        directions.calculate {
+            (response, error) -> Void in
+            
+            guard let response = response else {
+                if let error = error {
+                    print("Error: \(error)")
+                }
+                
+                return
+            }
+            
+            let route = response.routes[0]
+            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 8.0
+        return renderer
+    }
+    
+    
+    
+    
+    
+    
+    //this part is for timer
+    
+    
+    
+    var counter = 0.0
+    var timer = Timer()
+    //0 means finished/not started,1 means started,2 means paused
+    var isPlaying = 0
+    var startPoint : CLLocationCoordinate2D!
+    var endPoint : CLLocationCoordinate2D!
+    
+    @IBAction func startAndResumeTimer(_ sender: Any) {
+        if(isPlaying == 0) {
+            tap1.isEnabled = false
+            tap2.isEnabled = true
+            startAndResume.image = UIImage(named:"start_normal")
+            pauseAndReset.image = UIImage(named:"pause_catoon")
+            startPoint = locationManager.location!.coordinate
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+        }
+        else{
+            if (isPlaying == 1){
+                return
+            }
+            else{
+                tap1.isEnabled = false
+                tap2.isEnabled = true
+                isPlaying = 1
+                startPoint = locationManager.location!.coordinate
+                startAndResume.image = UIImage(named:"start_normal")
+                pauseAndReset.image = UIImage(named:"pause_catoon")
+                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+            }
+        }
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func pauseAndResetTimer(_ sender: Any) {
+        if(isPlaying == 0) {
+            return
+        }
+        else{
+            if (isPlaying == 1){
+                tap1.isEnabled = true
+                tap2.isEnabled = true
+                timer.invalidate()
+                isPlaying = 2
+                startAndResume.image = UIImage(named:"start_cartoon")
+                pauseAndReset.image = UIImage(named:"stop_red")
+            }
+            else{
+                tap1.isEnabled = true
+                tap2.isEnabled = false
+                timer.invalidate()
+                isPlaying = 0
+                counter = 0.0
+                timeLabel.text = String(counter)
+                startAndResume.image = UIImage(named:"start_green")
+                pauseAndReset.image = UIImage(named:"stop_red")
+            }
+        }
+    }
+    
+    @objc func UpdateTimer() {
+        counter = counter + 0.1
+        timeLabel.text = String(format: "%.0f:%.0f:%.0f", counter/3600,remainder(counter, 3600)/60,remainder(counter,60))
+        endPoint = locationManager.location!.coordinate
+        drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
+        startPoint = locationManager.location!.coordinate
+    }
+    
     
 }

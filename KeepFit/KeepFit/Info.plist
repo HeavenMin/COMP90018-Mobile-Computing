@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Add user&apos;s location in map</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Add user&apos;s location in map(standby protocol)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -24,14 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Pick photo to do the detection.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Add the photo you take in the app.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take photo to do the detection.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Add user's location in map</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Add user's location in map(standby protocol)</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Add the photo you take in the app.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pick photo to do the detection.</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

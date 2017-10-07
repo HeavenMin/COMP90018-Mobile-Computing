@@ -76,10 +76,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Spoon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="cyk-Uh-XfU">
                                 <rect key="frame" x="282" y="469" width="77" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="uyI-hq-dRC" appends="YES" id="8WA-3U-a8J"/>
+                                </connections>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Spoon" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-0h-gtK">
                                 <rect key="frame" x="190" y="469" width="84" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="PiU-Og-14m" appends="YES" id="6F6-tE-iZX"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzf-Sl-AmO">
                                 <rect key="frame" x="16" y="469" width="147" height="69"/>
@@ -102,9 +110,24 @@
                     <tabBarItem key="tabBarItem" title="Run" image="run_2" id="vsY-7X-y4a"/>
                     <connections>
                         <outlet property="mapView" destination="OVL-Cq-2jh" id="tVw-yo-OhW"/>
+                        <outlet property="pauseAndReset" destination="cyk-Uh-XfU" id="pjn-QL-pG6"/>
+                        <outlet property="startAndResume" destination="0Cf-0h-gtK" id="6Cm-X4-9Yo"/>
+                        <outlet property="tap1" destination="PiU-Og-14m" id="2sS-ez-TdN"/>
+                        <outlet property="tap2" destination="uyI-hq-dRC" id="c7J-ZJ-28d"/>
+                        <outlet property="timeLabel" destination="yzf-Sl-AmO" id="xcr-Ez-Zeu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZm-49-s6D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="PiU-Og-14m">
+                    <connections>
+                        <action selector="startAndResumeTimer:" destination="GbN-Xg-nJK" id="B0b-G0-xqE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="uyI-hq-dRC">
+                    <connections>
+                        <action selector="pauseAndResetTimer:" destination="GbN-Xg-nJK" id="6f6-BF-8ub"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1978.4000000000001" y="-784.85757121439292"/>
         </scene>

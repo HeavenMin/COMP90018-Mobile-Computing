@@ -17,13 +17,25 @@ class Artwork: NSObject ,MKAnnotation {
     let locationName: String
     let discipline: String
     let coordinate: CLLocationCoordinate2D
+    var iconImage: UIImage?
     
     init(title: String, locationName: String, discipline: String, coordinate: CLLocationCoordinate2D) {
         self.title = title
         self.locationName = locationName
         self.discipline = discipline
         self.coordinate = coordinate
-        
+        iconImage = UIImage(named:"park_1")
+        switch discipline {
+        case "Park":
+            iconImage = UIImage(named:"park_1")
+            break
+        case "Garden":
+            iconImage = UIImage(named:"park_3")
+            break
+        default:
+            iconImage = UIImage(named:"park_origin")
+            break
+        }
         super.init()
     }
     
@@ -48,6 +60,23 @@ class Artwork: NSObject ,MKAnnotation {
             return .purple
         default:
             return .green
+        }
+    }
+    func location() -> CLLocationCoordinate2D {
+        return coordinate
+    }
+    
+    func setNewIcon(){
+        switch discipline {
+        case "Park":
+            iconImage = UIImage(named:"park_1")
+            break
+        case "Garden":
+            iconImage = UIImage(named:"park_3")
+            break
+        default:
+            iconImage = UIImage(named:"park_origin")
+            break
         }
     }
 }

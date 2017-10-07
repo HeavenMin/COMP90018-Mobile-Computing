@@ -517,7 +517,7 @@
 				);
 				INFOPLIST_FILE = KeepFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HeavenMin.KeepFit;
+				PRODUCT_BUNDLE_IDENTIFIER = "Lang-LIN-KeepFit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KeepFit/KeepFit-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -538,7 +538,7 @@
 				);
 				INFOPLIST_FILE = KeepFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HeavenMin.KeepFit;
+				PRODUCT_BUNDLE_IDENTIFIER = "Lang-LIN-KeepFit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KeepFit/KeepFit-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
