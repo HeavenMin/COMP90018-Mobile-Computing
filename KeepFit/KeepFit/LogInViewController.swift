@@ -46,16 +46,22 @@ class ProfileViewController: ViewController {
         //        passWordRepeat.isHidden = true
     }
     
+    func signOut(){
+        userInfo.text = "Visitor"
+        run_label.text = "record your data"
+        calorie_label.text = "You need log in to"
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
-            userInfo.text = "Visitor"
-            run_label.text = ""
-            calorie_label.text = ""
+            signOut()
         }
         else{
             let username = ((UIApplication.shared.delegate) as! AppDelegate).userName!
             userInfo.text = username
+            run_label.text = "refreshing"
+            calorie_label.text = "refereshing"
             let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
             let calorie_table = client.table(withName: "UserFoodInfo")
             let run_table = client.table(withName: "UserFitnessRecord")
@@ -97,9 +103,7 @@ class ProfileViewController: ViewController {
                 action in
                 ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
                 ((UIApplication.shared.delegate) as! AppDelegate).userName = ""
-                self.userInfo.text = "Visitor"
-                self.run_label.text = ""
-                self.calorie_label.text = ""
+                self.signOut()
             })
             let cancelAction = UIAlertAction(title:"cancel",style: UIAlertActionStyle.cancel,handler:nil)
             logOutAlert.addAction(logOutAction)
