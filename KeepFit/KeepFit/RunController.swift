@@ -247,11 +247,12 @@ class RunController: UIViewController,MKMapViewDelegate{
     var endPoint : CLLocationCoordinate2D!
     var distance = 0
     
-    @IBAction func startAndResumeTimer(_ sender: Any) {
+    
+    @IBAction func startAndResume(_ sender: Any) {
         if(isPlaying == 0) {
             tap1.isEnabled = false
             tap2.isEnabled = true
-            tap1.setImage(UIImage(named:"start_normal"), for: .normal)
+            tap1.setImage(UIImage(named:"start_green"), for: .normal)
             tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
@@ -266,14 +267,15 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap2.isEnabled = true
                 isPlaying = 1
                 startPoint = locationManager.location!.coordinate
-                tap1.setImage(UIImage(named:"start_normal"), for: .normal)
+                tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
             }
         }
     }
     
-    @IBAction func pauseAndResetTimer(_ sender: Any) {
+    
+    @IBAction func pauseAndReset(_ sender: Any) {
         if(isPlaying == 0) {
             return
         }
@@ -284,7 +286,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 timer.invalidate()
                 isPlaying = 2
                 
-                tap1.setImage(UIImage(named:"start_cartoon"), for: .normal)
+                tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"stop_red"), for: .normal)
             }
             else{
