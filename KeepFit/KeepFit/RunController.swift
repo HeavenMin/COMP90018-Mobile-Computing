@@ -39,7 +39,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         startAndResume.image = UIImage(named:"start_green")
         pauseAndReset.image = UIImage(named:"stop_red")
         tap1.isEnabled = true
-        tap2.isEnabled = false
+        tap2.isEnabled = true
         
         
         
@@ -201,7 +201,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.green
+        renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 3.0
         return renderer
     }
@@ -215,7 +215,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     
     
-    var counter = 0.0
+    var counter :Int = 0
     var timer = Timer()
     //0 means finished/not started,1 means started,2 means paused
     var isPlaying = 0
@@ -225,8 +225,6 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     @IBAction func startAndResumeTimer(_ sender: Any) {
         if(isPlaying == 0) {
-            tap1.isEnabled = false
-            tap2.isEnabled = true
             startAndResume.image = UIImage(named:"start_normal")
             pauseAndReset.image = UIImage(named:"pause_catoon")
             startPoint = locationManager.location!.coordinate
@@ -237,8 +235,6 @@ class RunController: UIViewController,MKMapViewDelegate{
                 return
             }
             else{
-                tap1.isEnabled = false
-                tap2.isEnabled = true
                 isPlaying = 1
                 startPoint = locationManager.location!.coordinate
                 startAndResume.image = UIImage(named:"start_normal")
@@ -254,16 +250,12 @@ class RunController: UIViewController,MKMapViewDelegate{
         }
         else{
             if (isPlaying == 1){
-                tap1.isEnabled = true
-                tap2.isEnabled = true
                 timer.invalidate()
                 isPlaying = 2
                 startAndResume.image = UIImage(named:"start_cartoon")
                 pauseAndReset.image = UIImage(named:"stop_red")
             }
             else{
-                tap1.isEnabled = true
-                tap2.isEnabled = false
                 timer.invalidate()
                 isPlaying = 0
                 counter = 0
@@ -274,9 +266,13 @@ class RunController: UIViewController,MKMapViewDelegate{
         }
     }
     
+    
     @objc func UpdateTimer() {
         counter = counter + 1
-        timeLabel.text = String(format: "%2.0f:%2.0f:%2.0f", counter/3600,remainder(counter, 3600)/60,remainder(counter,60))
+        let hour = counter % 3600
+        let minute = (counter % 3600)/60
+        let second = counter % 60
+        timeLabel.text = String(format: "%d:%d:%d",hour,minute,second)
         endPoint = locationManager.location!.coordinate
         drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
         //CLLocation(endPoint)
