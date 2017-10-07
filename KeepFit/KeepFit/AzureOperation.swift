@@ -26,7 +26,7 @@ class AzureOperation {
         nowTime = timeFormatter.string(from: date)
     }
     func insertDistanceRecord(distance:Double) {
-        let newItem = ["UserName":user_name, "RunRecord":"firstRun","Calorie":1000,"Distance":distance] as [String : Any]
+        let newItem = ["UserName":user_name, "RunRecord":"firstRun","Calorie":1000,"Distance":distance,"RunStartTime":Date()] as [String : Any]
         run_table?.insert(newItem) { (result, error) in
             if let err = error {
                 print("ERROR ", err)
@@ -36,7 +36,7 @@ class AzureOperation {
         }
     }
     func insertFoodRecord(food_name:String,calorie:Double){
-        let newItem = ["UserName":user_name, "FoodName":food_name,"Quantity":calorie] as [String : Any]
+        let newItem = ["UserName":user_name, "FoodName":food_name,"Quantity":calorie,"EatTime":Date()] as [String : Any]
         calorie_table?.insert(newItem) { (result, error) in
             if let err = error {
                 print("ERROR ", err)
@@ -53,10 +53,8 @@ class AzureOperation {
                 print(err)
             }else if let items = result?.items{
                 for item in items{
-                    let c = String(describing: item["createdAt"].unsafelyUnwrapped)
-                    let startSlicingIndex = c.index(c.startIndex, offsetBy: 10)
-                    let date1 = c[c.startIndex..<startSlicingIndex]
-                    if self.nowTime == date1 {
+                    let c = item["EatTime"] as!Date
+                    if Calendar.current.isDateInToday(c){
                         dis += item["Distance"] as! Double
                     }
                 }
@@ -72,10 +70,8 @@ class AzureOperation {
                 print(err)
             }else if let items = result?.items{
                 for item in items{
-                    let c = String(describing: item["createdAt"].unsafelyUnwrapped)
-                    let startSlicingIndex = c.index(c.startIndex, offsetBy: 10)
-                    let date1 = c[c.startIndex..<startSlicingIndex]
-                    if self.nowTime == date1 {
+                    let c = item["EatTime"] as!Date
+                    if Calendar.current.isDateInToday(c){
                         cal += item["Quantity"] as! Double
                     }
                 }
