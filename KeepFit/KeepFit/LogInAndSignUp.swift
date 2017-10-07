@@ -28,6 +28,10 @@ class LogInViewController:ViewController{
     override func viewDidLoad() {
         passWord.isSecureTextEntry = true
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var alertText: UITextView!
     @IBOutlet weak var passWord: UITextField!
@@ -72,6 +76,14 @@ class SignUpViewController: ViewController {
     override func viewDidLoad() {
         passWord.isSecureTextEntry = true
         passWordRepeat.isSecureTextEntry = true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @IBOutlet weak var userName: UITextField!
