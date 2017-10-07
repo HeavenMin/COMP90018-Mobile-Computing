@@ -19,6 +19,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     
     let initialLocation = CLLocation(latitude: -37.814251, longitude: 144.963169)
     
+    
     // help functions to set the radius showed in the map
     let regionRadius: CLLocationDistance = 2000
     func centerMapOnLocation(location: CLLocation) {
@@ -153,16 +154,25 @@ class RunController: UIViewController,MKMapViewDelegate{
         }
         return nil
     }
+    
+    var drawingMap = false
+    
+    var lastRoute : MKPolyline!
+    
+    var firstTime = true
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! Artwork
         
         let sourceLocation = locationManager.location!.coordinate
         let destinationLocation = location.location()
+        drawingMap = false
         drawPath(sourceLocation: sourceLocation,destinationLocation: destinationLocation)
         
 //        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
 //        location.mapItem().openInMaps(launchOptions: launchOptions)
     }
+
     
     func drawPath(sourceLocation:CLLocationCoordinate2D, destinationLocation:CLLocationCoordinate2D){
         let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
@@ -195,15 +205,32 @@ class RunController: UIViewController,MKMapViewDelegate{
             }
             
             let route = response.routes[0]
-            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            if(self.firstTime){
+                self.firstTime = false
+            }
+            else{
+                self.mapView.remove(self.lastRoute)
+            }
             
+            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            self.lastRoute = route.polyline
+            if (!self.drawingMap){
+                let rect = route.polyline.boundingMapRect
+                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            }
         }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
-        renderer.lineWidth = 3.0
+        if (!self.drawingMap){
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 3.0
+        }
+        else{
+            renderer.strokeColor = UIColor.red
+            renderer.lineWidth = 3.0
+        }
         return renderer
     }
     
@@ -287,6 +314,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
         //CLLocation(endPoint)
         startPoint = locationManager.location!.coordinate
+        drawingMap = true
     }
     
     
