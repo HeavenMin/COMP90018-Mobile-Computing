@@ -23,13 +23,29 @@ class LogInAndSignUp: ViewController {
         dismiss(animated: false, completion: nil)
     }
 }
-class LogInViewController:ViewController{
+class LogInViewController:ViewController,UITextFieldDelegate{
     
     override func viewDidLoad() {
         passWord.isSecureTextEntry = true
+        userName.delegate = self
+        userName.returnKeyType = .next
+        passWord.returnKeyType = .done
+        passWord.delegate = self
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textField == userName){
+            passWord.becomeFirstResponder()
+            
+        }
+        if(textField == passWord){
+            textField.resignFirstResponder()
+            submit(UIButton())
+        }
+        return true
     }
     
     @IBOutlet weak var userName: UITextField!
@@ -38,6 +54,7 @@ class LogInViewController:ViewController{
     @IBAction func submit(_ sender: UIButton) {
         if let user_name = userName.text {
             if let pass_word = passWord.text{
+                alertText.text = "Logging"
                 let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
                 let table = client.table(withName: "UserInfo")
                 let predicate =  NSPredicate(format: "(UserName == \"\(user_name)\") AND (PassWord == \"\(pass_word)\")")
@@ -71,15 +88,30 @@ class LogInViewController:ViewController{
     
 }
 
-class SignUpViewController: ViewController {
+class SignUpViewController: ViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         passWord.isSecureTextEntry = true
         passWordRepeat.isSecureTextEntry = true
+        passWordRepeat.delegate = self
+        passWord.delegate = self
+        userName.delegate = self
+        userName.returnKeyType = .next
+        passWord.returnKeyType = .next
+        passWordRepeat.returnKeyType = .done
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool{
-        textField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        if textField == userName {
+            passWord.becomeFirstResponder()
+        }
+        if textField == passWord {
+            passWordRepeat.becomeFirstResponder()
+        }
+        if textField == passWordRepeat {
+            textField.resignFirstResponder()
+            submit(UIButton())
+        }
         return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -95,6 +127,7 @@ class SignUpViewController: ViewController {
             if let pass_word = passWord.text{
                 if let pass_word_repeat = passWordRepeat.text {
                     if (pass_word == pass_word_repeat){
+                        alertText.text = "signuping"
                         let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
                         let table = client.table(withName: "UserInfo")
                         let predicate =  NSPredicate(format: "(UserName == \"\(user_name)\")")
