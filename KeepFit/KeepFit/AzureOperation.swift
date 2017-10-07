@@ -13,12 +13,17 @@ class AzureOperation {
     var calorie_table: MSTable?
     var run_table: MSTable?
     var user_name: String
+    var nowTime: String
     
     init() {
         client = ((UIApplication.shared.delegate) as! AppDelegate).client!
         calorie_table = self.client?.table(withName: "UserFoodInfo")
         run_table = self.client?.table(withName: "UserFitnessRecord")
         user_name = ((UIApplication.shared.delegate) as! AppDelegate).userName!
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd"
+        nowTime = timeFormatter.string(from: date)
     }
     func insertDistanceRecord(distance:Float) {
         let newItem = ["UserName":user_name, "RunRecord":"firstRun","Calorie":1000,"Distance":distance] as [String : Any]
@@ -48,7 +53,12 @@ class AzureOperation {
                 print(err)
             }else if let items = result?.items{
                 for item in items{
-                    dis += item["Distance"] as! Double
+                    let c = String(describing: item["createdAt"].unsafelyUnwrapped)
+                    let startSlicingIndex = c.index(c.startIndex, offsetBy: 10)
+                    let date1 = c[c.startIndex..<startSlicingIndex]
+                    if self.nowTime == date1 {
+                        dis += item["Distance"] as! Double
+                    }
                 }
                 label.text = "\(dis)"
             }
@@ -62,8 +72,12 @@ class AzureOperation {
                 print(err)
             }else if let items = result?.items{
                 for item in items{
-                    let a = item["Quantity"] as! Double
-                    cal += a
+                    let c = String(describing: item["createdAt"].unsafelyUnwrapped)
+                    let startSlicingIndex = c.index(c.startIndex, offsetBy: 10)
+                    let date1 = c[c.startIndex..<startSlicingIndex]
+                    if self.nowTime == date1 {
+                        cal += item["Quantity"] as! Double
+                    }
                 }
                 label.text = "\(cal)"
             }
