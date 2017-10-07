@@ -200,7 +200,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V35-PE-fMg" userLabel="camera_button">
-                                <rect key="frame" x="247" y="544" width="70" height="70"/>
+                                <rect key="frame" x="255" y="544" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
@@ -230,31 +230,40 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDJ-Ac-KNc" userLabel="photo_lib_button">
-                                <rect key="frame" x="58" y="544" width="70" height="70"/>
+                                <rect key="frame" x="50" y="544" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="photo"/>
                                 <connections>
                                     <action selector="getImageFromPhotoLibrary:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uGD-PE-LR5"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaE-5y-r7i">
+                                <rect key="frame" x="289" y="64" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otc-3D-Dth">
+                                <rect key="frame" x="195" y="559" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="eat_button"/>
+                                <connections>
+                                    <action selector="add_eat_info:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iMb-yj-KU0"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-gq-Tjc">
-                                <rect key="frame" x="170" y="562" width="35" height="35"/>
+                                <rect key="frame" x="140" y="562" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="greenPlus"/>
                                 <connections>
                                     <action selector="addFoodInfo_admin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAi-Ox-cVk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaE-5y-r7i">
-                                <rect key="frame" x="289" y="64" width="70" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Food" image="food" id="Nih-Rw-dab"/>
                     <connections>
+                        <outlet property="addeat_button" destination="Otc-3D-Dth" id="jaD-Pa-H53"/>
                         <outlet property="addfood_button" destination="PfR-gq-Tjc" id="42w-ht-rxn"/>
                         <outlet property="foodInformation" destination="Xgr-q1-4qM" id="4nU-85-TH3"/>
                         <outlet property="photoScene" destination="wux-eo-DOJ" id="6eq-TS-uJN"/>
@@ -512,6 +521,7 @@
         <image name="camera" width="64" height="64"/>
         <image name="close_black" width="50" height="50"/>
         <image name="eat" width="85" height="85"/>
+        <image name="eat_button" width="32" height="32"/>
         <image name="food" width="30" height="30"/>
         <image name="greenPlus" width="264" height="264"/>
         <image name="help" width="50" height="50"/>

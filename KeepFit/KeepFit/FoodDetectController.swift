@@ -20,8 +20,10 @@ class FoodDetectController: UIViewController {
     @IBOutlet weak var foodInformation: UITextView!
     @IBOutlet weak var recommend_sign: UIImageView!
     @IBOutlet weak var addfood_button: UIButton!
+    @IBOutlet weak var addeat_button: UIButton!
     
     var canUpdateFoodInfo: Bool = false
+    var foodKcal: Int?
     
     let vowels: [Character] = ["a", "e", "i", "o", "u"]
     
@@ -49,6 +51,7 @@ class FoodDetectController: UIViewController {
         prediction.text = "Prediction"
         foodInformation.text = "Please choose a food you want to recognize form Photo Library or take a picture from your Camera."
         addfood_button.isEnabled = false
+        addeat_button.isEnabled = false
         
     }
     
@@ -210,6 +213,28 @@ extension FoodDetectController {
         
     }
     
+    @IBAction func add_eat_info(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Eat Info",
+            message: "Did you eat the food?",
+            preferredStyle: UIAlertControllerStyle.alert)
+        
+        let insertEatInfoAction = UIAlertAction(
+        title: "OK", style: UIAlertActionStyle.default) {
+            (action) -> Void in
+            AzureOperation().insertFoodRecord(food_name:self.prediction.text!, calorie:Double(self.foodKcal!))
+            self.addeat_button.isEnabled = false
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        alertController.addAction(insertEatInfoAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     //jump to the scale view {Fade Push Reveal MoveIn}
     @IBAction func gotoScaleView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -236,6 +261,7 @@ extension FoodDetectController: UIImagePickerControllerDelegate {
             //after select the image, disable the update button first.
             self.canUpdateFoodInfo = false
             self.addfood_button.isEnabled = false
+            self.addeat_button.isEnabled = false
             
             //if image was taked from camera, save it to photo album
             if (picker.sourceType == .camera) {
@@ -290,6 +316,7 @@ extension FoodDetectController {
 //                self?.foodInformation.text = "\(Int(topResult.confidence * 100))% it's \(topResult.identifier), the calorie of this food is \(FoodDatabaseAzureOperation().queryForCal(food_name: topResult.identifier.components(separatedBy: ",")[0]))"
                 FoodDatabaseAzureOperation().queryForKcal(food_name: topResult.identifier.components(separatedBy: ",")[0]){(kcal: Int) -> Void in
                     // Int(topResult.confidence * 100) to show the confidence, not in use now.
+                    self?.foodKcal = kcal
                     var advice: String
                     if (kcal <= 350 && kcal >= 0) {
                         advice = "Recommand to eat."
@@ -305,6 +332,9 @@ extension FoodDetectController {
                     }
                     if (kcal != -1) {
                         self?.foodInformation.text = "It's \(an_or_a) \(topResult.identifier.components(separatedBy: ",")[0]). The calorie of this food is \(kcal) kcal.\n\(advice)"
+                        if (((UIApplication.shared.delegate) as! AppDelegate).userName != nil) {
+                            self?.addeat_button.isEnabled = true
+                        }
                     } else {
                         self?.foodInformation.text = "It's not a food, or its data is not included. If you want to help us improve the database. Please click the button (+) to help us."
                         self?.canUpdateFoodInfo = true
