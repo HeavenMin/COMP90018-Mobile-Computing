@@ -196,15 +196,13 @@ class RunController: UIViewController,MKMapViewDelegate{
             let route = response.routes[0]
             self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
             
-            let rect = route.polyline.boundingMapRect
-            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
         }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
-        renderer.lineWidth = 8.0
+        renderer.strokeColor = UIColor.green
+        renderer.lineWidth = 3.0
         return renderer
     }
     
@@ -223,6 +221,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     var isPlaying = 0
     var startPoint : CLLocationCoordinate2D!
     var endPoint : CLLocationCoordinate2D!
+    var distance = 0
     
     @IBAction func startAndResumeTimer(_ sender: Any) {
         if(isPlaying == 0) {
@@ -231,7 +230,7 @@ class RunController: UIViewController,MKMapViewDelegate{
             startAndResume.image = UIImage(named:"start_normal")
             pauseAndReset.image = UIImage(named:"pause_catoon")
             startPoint = locationManager.location!.coordinate
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
         }
         else{
             if (isPlaying == 1){
@@ -244,11 +243,9 @@ class RunController: UIViewController,MKMapViewDelegate{
                 startPoint = locationManager.location!.coordinate
                 startAndResume.image = UIImage(named:"start_normal")
                 pauseAndReset.image = UIImage(named:"pause_catoon")
-                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
             }
         }
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
     }
     
     @IBAction func pauseAndResetTimer(_ sender: Any) {
@@ -269,7 +266,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap2.isEnabled = false
                 timer.invalidate()
                 isPlaying = 0
-                counter = 0.0
+                counter = 0
                 timeLabel.text = String(counter)
                 startAndResume.image = UIImage(named:"start_green")
                 pauseAndReset.image = UIImage(named:"stop_red")
@@ -278,10 +275,11 @@ class RunController: UIViewController,MKMapViewDelegate{
     }
     
     @objc func UpdateTimer() {
-        counter = counter + 0.1
-        timeLabel.text = String(format: "%.0f:%.0f:%.0f", counter/3600,remainder(counter, 3600)/60,remainder(counter,60))
+        counter = counter + 1
+        timeLabel.text = String(format: "%2.0f:%2.0f:%2.0f", counter/3600,remainder(counter, 3600)/60,remainder(counter,60))
         endPoint = locationManager.location!.coordinate
         drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
+        //CLLocation(endPoint)
         startPoint = locationManager.location!.coordinate
     }
     
