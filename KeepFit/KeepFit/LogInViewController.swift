@@ -11,25 +11,55 @@ import UIKit
 
 class ProfileViewController: ViewController {
     
-
+    @IBAction func Detail(_ sender: UIButton) {
+        let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
+        let calorie_table = client.table(withName: "UserFoodInfo")
+        let run_table = client.table(withName: "UserFitnessRecord")
+        let newItem = ["UserName":"admin", "FoodName":"banana","Quantity":1000] as [String : Any]
+        calorie_table.insert(newItem) { (result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let item = result {
+                print("Todo Item: ", item["UserName"] ?? "Fault")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        let newItem1 = ["UserName":"admin", "RunRecord":"firstRun","Calorie":1000,"Distance":3.3] as [String : Any]
+        run_table.insert(newItem1) { (result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let item = result {
+                print("Todo Item: ", item["UserName"] ?? "Fault")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+    }
     
-
+    
+    @IBOutlet weak var run_label: UILabel!
+    @IBOutlet weak var calorie_label: UILabel!
+    
     @IBOutlet weak var userInfo: UILabel!
     
     override func viewDidLoad() {
         //        passWordRepeat.isHidden = true
-//        client = ((UIApplication.shared.delegate) as! AppDelegate).client!
-//        table = client?.table(withName: "UserInfo")
-        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
             userInfo.text = "Visitor"
+            run_label.text = ""
+            calorie_label.text = ""
         }
         else{
             userInfo.text = ((UIApplication.shared.delegate) as! AppDelegate).userName
+            let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
+            let calorie_table = client.table(withName: "UserFoodInfo")
+            let run_table = client.table(withName: "UserFitnessInfo")
+            
+            
         }
     }
     
@@ -44,6 +74,8 @@ class ProfileViewController: ViewController {
                 ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
                 ((UIApplication.shared.delegate) as! AppDelegate).userName = ""
                 self.userInfo.text = "Visitor"
+                self.run_label.text = ""
+                self.calorie_label.text = ""
             })
             let cancelAction = UIAlertAction(title:"cancel",style: UIAlertActionStyle.cancel,handler:nil)
             logOutAlert.addAction(logOutAction)
