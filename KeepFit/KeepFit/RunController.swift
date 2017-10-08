@@ -15,6 +15,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var tap1: UIButton!
     @IBOutlet weak var tap2: UIButton!
+    var route = Array<MKPolyline>()
     
     
     
@@ -307,7 +308,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                     let azureOperator = AzureOperation()
                     azureOperator.insertDistanceRecord(distance: distance)
                 }
-                
+                self.mapView.removeOverlays(route)
+                route.removeAll()
                 distance = 0.0
             }
         }
@@ -329,7 +331,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         var coordinates = locations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
         var polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
         self.mapView.add(polyline, level: MKOverlayLevel.aboveRoads)
-        
+        route.append(polyline)
         var startPointCoordinate = CLLocation(latitude:countStartPoint.latitude,longitude: countStartPoint.longitude)
         var endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
         distance = distance + startPointCoordinate.distance(from: endPointCoordinate)

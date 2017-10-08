@@ -63,7 +63,7 @@ class LogInViewController:ViewController,UITextFieldDelegate{
                         print("ERROR ", err)
                     } else if let items = result?.items {
                         if items.count == 1 {
-                            ((UIApplication.shared.delegate) as! AppDelegate).userName = items[0]["UserName"] as! String
+                            ((UIApplication.shared.delegate) as! AppDelegate).userName = items[0]["UserName"] as? String
                             ((UIApplication.shared.delegate) as! AppDelegate).isLogin = true
                             self.dismiss(animated: false, completion: nil)
                         }
