@@ -65,33 +65,6 @@ class ProfileViewController: ViewController {
             let azure_operator = AzureOperation()
             azure_operator.queryCalorie(label: calorie_label)
             azure_operator.queryDistance(label: run_label)
-//            let client = ((UIApplication.shared.delegate) as! AppDelegate).client!
-//            let calorie_table = client.table(withName: "UserFoodInfo")
-//            let run_table = client.table(withName: "UserFitnessRecord")
-//            let predicate =  NSPredicate(format: "(UserName == \"\(username)\")")
-//            calorie_table.read(with:predicate){ (result,error) in
-//                if let err = error{
-//                    print(err)
-//                }else if let items = result?.items{
-//                    var cal = 0
-//                    for item in items{
-//                        cal += item["Quantity"] as! Int
-//                    }
-//                    self.calorie_label.text = "\(cal)"
-//                }
-//            }
-//            let predicate1 =  NSPredicate(format: "(UserName == \"\(username)\")")
-//            run_table.read(with:predicate1){ (result,error) in
-//                if let err = error{
-//                    print(err)
-//                }else if let items = result?.items{
-//                    var dis = 0.0
-//                    for item in items{
-//                        dis += item["Distance"] as! Double
-//                    }
-//                    self.run_label.text = "\(dis)"
-//                }
-//            }
         }
     }
     
