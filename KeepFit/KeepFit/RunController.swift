@@ -16,11 +16,11 @@ class RunController: UIViewController,MKMapViewDelegate{
     @IBOutlet weak var tap1: UIButton!
     @IBOutlet weak var tap2: UIButton!
     
-    let initialLocation = CLLocation(latitude: -37.814251, longitude: 144.963169)
+    
     
     
     // help functions to set the radius showed in the map
-    let regionRadius: CLLocationDistance = 2000
+    let regionRadius: CLLocationDistance = 500
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius * 2.0, regionRadius * 2.0)
@@ -30,7 +30,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        centerMapOnLocation(location: initialLocation)
+        centerMapOnLocation(location: CLLocation(latitude:locationManager.location!.coordinate.latitude,longitude:locationManager.location!.coordinate.longitude))
         
         
         //enable image button
@@ -244,6 +244,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     //0 means finished/not started,1 means started,2 means paused
     var isPlaying = 0
     var startPoint : CLLocationCoordinate2D!
+    var countStartPoint : CLLocationCoordinate2D!
     var endPoint : CLLocationCoordinate2D!
     var distance = 0.0
     
@@ -256,6 +257,7 @@ class RunController: UIViewController,MKMapViewDelegate{
             tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
+            countStartPoint = startPoint
             var resetRegion = MKCoordinateRegionMakeWithDistance(startPoint,300,300)
             mapView.setRegion(resetRegion, animated: true)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
@@ -268,6 +270,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap1.isEnabled = false
                 tap2.isEnabled = true
                 isPlaying = 1
+                countStartPoint = locationManager.location!.coordinate
                 tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
@@ -322,16 +325,16 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         drawingMap = true
         
-        var locations = [CLLocation(latitude:startPoint.latitude,longitude:startPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
+        var locations = [CLLocation(latitude:countStartPoint.latitude,longitude:countStartPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
         var coordinates = locations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
         var polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
         self.mapView.add(polyline, level: MKOverlayLevel.aboveRoads)
         
-        var startPointCoordinate = CLLocation(latitude:startPoint.latitude,longitude: startPoint.longitude)
+        var startPointCoordinate = CLLocation(latitude:countStartPoint.latitude,longitude: countStartPoint.longitude)
         var endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
-        distance = startPointCoordinate.distance(from: endPointCoordinate)
+        distance = distance + startPointCoordinate.distance(from: endPointCoordinate)
         distanceLabel.text = String(format:"%.2f meters",distance)
-        
+        countStartPoint = endPoint
     }
     
     
