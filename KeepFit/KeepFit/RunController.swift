@@ -327,13 +327,13 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         drawingMap = true
         
-        var locations = [CLLocation(latitude:countStartPoint.latitude,longitude:countStartPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
+        let locations = [CLLocation(latitude:countStartPoint.latitude,longitude:countStartPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
         var coordinates = locations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
-        var polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
+        let polyline = MKPolyline(coordinates: &coordinates, count: locations.count)
         self.mapView.add(polyline, level: MKOverlayLevel.aboveRoads)
         route.append(polyline)
-        var startPointCoordinate = CLLocation(latitude:countStartPoint.latitude,longitude: countStartPoint.longitude)
-        var endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
+        let startPointCoordinate = CLLocation(latitude:countStartPoint.latitude,longitude: countStartPoint.longitude)
+        let endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
         distance = distance + startPointCoordinate.distance(from: endPointCoordinate)
         distanceLabel.text = String(format:"%.2f meters",distance)
         countStartPoint = endPoint
