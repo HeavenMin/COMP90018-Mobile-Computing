@@ -19,7 +19,11 @@ class AzureOperation {
         client = ((UIApplication.shared.delegate) as! AppDelegate).client!
         calorie_table = self.client?.table(withName: "UserFoodInfo")
         run_table = self.client?.table(withName: "UserFitnessRecord")
-        user_name = ((UIApplication.shared.delegate) as! AppDelegate).userName!
+        if let userName = ((UIApplication.shared.delegate) as! AppDelegate).userName{
+            user_name = userName
+        }else{
+            user_name = ""
+        }
         let date = Date()
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd"
