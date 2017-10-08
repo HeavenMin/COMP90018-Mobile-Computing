@@ -30,12 +30,13 @@ class RunController: UIViewController,MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         centerMapOnLocation(location: CLLocation(latitude:locationManager.location!.coordinate.latitude,longitude:locationManager.location!.coordinate.longitude))
         
         
         //enable image button
-        tap1.setImage(UIImage(named:"start_green"), for: .normal)
-        tap2.setImage(UIImage(named:"stop_red"), for: .normal)
+        tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
+        tap2.setBackgroundImage(UIImage(named:"stop_red"), for: .normal)
         tap1.isEnabled = true
         tap2.isEnabled = false
         
@@ -94,7 +95,6 @@ class RunController: UIViewController,MKMapViewDelegate{
         mapView.addAnnotation(artwork8)
         mapView.addAnnotation(artwork9)
         mapView.addAnnotation(artwork10)
-        
         
         
         
@@ -253,8 +253,8 @@ class RunController: UIViewController,MKMapViewDelegate{
         if(isPlaying == 0) {
             tap1.isEnabled = false
             tap2.isEnabled = true
-            tap1.setImage(UIImage(named:"start_green"), for: .normal)
-            tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
+            tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
+            tap2.setBackgroundImage(UIImage(named:"pause_catoon"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
             countStartPoint = startPoint
@@ -271,8 +271,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap2.isEnabled = true
                 isPlaying = 1
                 countStartPoint = locationManager.location!.coordinate
-                tap1.setImage(UIImage(named:"start_green"), for: .normal)
-                tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
+                tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
+                tap2.setBackgroundImage(UIImage(named:"pause_catoon"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
             }
         }
@@ -290,8 +290,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 timer.invalidate()
                 isPlaying = 2
                 
-                tap1.setImage(UIImage(named:"start_green"), for: .normal)
-                tap2.setImage(UIImage(named:"stop_red"), for: .normal)
+                tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
+                tap2.setBackgroundImage(UIImage(named:"stop_red"), for: .normal)
             }
             else{
                 tap1.isEnabled = true
@@ -300,8 +300,8 @@ class RunController: UIViewController,MKMapViewDelegate{
                 isPlaying = 0
                 counter = 0
                 timeLabel.text = String(" 0: 0: 0")
-                tap1.setImage(UIImage(named:"start_green"), for: .normal)
-                tap2.setImage(UIImage(named:"stop_red"), for: .normal)
+                tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
+                tap2.setBackgroundImage(UIImage(named:"stop_red"), for: .normal)
                 
                 if distance > 50 {
                     let azureOperator = AzureOperation()
