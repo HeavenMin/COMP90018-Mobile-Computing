@@ -322,7 +322,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         let hour = counter / 3600
         let minute = (counter % 3600)/60
         let second = counter % 60
-        timeLabel.text = String(format: "%d:%d:%d",hour,minute,second)
+        timeLabel.text = String(format: "%02d:%02d:%02d",hour,minute,second)
         endPoint = locationManager.location!.coordinate
         
         drawingMap = true
