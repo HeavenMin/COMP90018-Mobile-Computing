@@ -335,7 +335,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         let startPointCoordinate = CLLocation(latitude:countStartPoint.latitude,longitude: countStartPoint.longitude)
         let endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
         distance = distance + startPointCoordinate.distance(from: endPointCoordinate)
-        distanceLabel.text = String(format:"%.2f meters",distance)
+        distanceLabel.text = String(format:"%.2f",distance)
         countStartPoint = endPoint
     }
     
