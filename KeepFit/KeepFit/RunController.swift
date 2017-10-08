@@ -255,7 +255,7 @@ class RunController: UIViewController,MKMapViewDelegate{
             tap1.isEnabled = false
             tap2.isEnabled = true
             tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
-            tap2.setBackgroundImage(UIImage(named:"pause_catoon"), for: .normal)
+            tap2.setBackgroundImage(UIImage(named:"pause_orange"), for: .normal)
             isPlaying = 1
             startPoint = locationManager.location!.coordinate
             countStartPoint = startPoint
@@ -273,7 +273,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 isPlaying = 1
                 countStartPoint = locationManager.location!.coordinate
                 tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
-                tap2.setBackgroundImage(UIImage(named:"pause_catoon"), for: .normal)
+                tap2.setBackgroundImage(UIImage(named:"pause_orange"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
             }
         }
