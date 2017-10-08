@@ -65,7 +65,7 @@ class AzureOperation {
                         dis += item["Distance"] as! Double
                     }
                 }
-                label.text = "\(dis)"
+                label.text = String(format: "%.2f", dis / 1000)
             }
         }
     }
