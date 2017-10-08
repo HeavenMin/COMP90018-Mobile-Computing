@@ -26,6 +26,10 @@ class AzureOperation {
         nowTime = timeFormatter.string(from: date)
     }
     func insertDistanceRecord(distance:Double) {
+        if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
+            print("log in first")
+            return
+        }
         let newItem = ["UserName":user_name, "RunRecord":"firstRun","Calorie":1000,"Distance":distance,"RunStartTime":Date()] as [String : Any]
         run_table?.insert(newItem) { (result, error) in
             if let err = error {
@@ -36,6 +40,9 @@ class AzureOperation {
         }
     }
     func insertFoodRecord(food_name:String,calorie:Double){
+        if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
+            return
+        }
         let newItem = ["UserName":user_name, "FoodName":food_name,"Quantity":calorie,"EatTime":Date()] as [String : Any]
         calorie_table?.insert(newItem) { (result, error) in
             if let err = error {

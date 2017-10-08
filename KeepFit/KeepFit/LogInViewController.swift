@@ -47,6 +47,10 @@ class ProfileViewController: ViewController {
     }
     
     func signOut(){
+        ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
+        ((UIApplication.shared.delegate) as! AppDelegate).userName = nil
+    }
+    func visitorProfile() {
         userInfo.text = "Visitor"
         run_label.text = "record your data"
         calorie_label.text = "You need log in to"
@@ -55,7 +59,7 @@ class ProfileViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if !((UIApplication.shared.delegate) as! AppDelegate).isLogin {
-            signOut()
+            visitorProfile()
         }
         else{
             let username = ((UIApplication.shared.delegate) as! AppDelegate).userName!
@@ -76,9 +80,8 @@ class ProfileViewController: ViewController {
             let logOutAlert = UIAlertController(title:"Log Out",message:"tap Ok to log out tap cancel to return",preferredStyle:UIAlertControllerStyle.alert)
             let logOutAction = UIAlertAction(title:"OK",style: .default,handler:{
                 action in
-                ((UIApplication.shared.delegate) as! AppDelegate).isLogin = false
-                ((UIApplication.shared.delegate) as! AppDelegate).userName = ""
                 self.signOut()
+                self.visitorProfile()
             })
             let cancelAction = UIAlertAction(title:"cancel",style: UIAlertActionStyle.cancel,handler:nil)
             logOutAlert.addAction(logOutAction)
