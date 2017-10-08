@@ -60,7 +60,7 @@ class AzureOperation {
                 print(err)
             }else if let items = result?.items{
                 for item in items{
-                    let c = item["EatTime"] as!Date
+                    let c = item["RunStartTime"] as!Date
                     if Calendar.current.isDateInToday(c){
                         dis += item["Distance"] as! Double
                     }
