@@ -24,16 +24,13 @@ class Artwork: NSObject ,MKAnnotation {
         self.locationName = locationName
         self.discipline = discipline
         self.coordinate = coordinate
-        iconImage = UIImage(named:"park_1")
+        iconImage = UIImage(named:"garden_location")
         switch discipline {
-        case "Park":
-            iconImage = UIImage(named:"park_1")
-            break
-        case "Garden":
-            iconImage = UIImage(named:"park_3")
+        case "Park","Garden":
+            iconImage = UIImage(named:"garden_location")
             break
         default:
-            iconImage = UIImage(named:"park_origin")
+            iconImage = UIImage(named:"park_3")
             break
         }
         super.init()
@@ -52,30 +49,17 @@ class Artwork: NSObject ,MKAnnotation {
         
         return mapItem
     }
-    func pinColor() -> MKPinAnnotationColor  {
-        switch discipline {
-        case "Park":
-            return .red
-        case "Garden":
-            return .purple
-        default:
-            return .green
-        }
-    }
     func location() -> CLLocationCoordinate2D {
         return coordinate
     }
     
     func setNewIcon(){
         switch discipline {
-        case "Park":
-            iconImage = UIImage(named:"park_1")
-            break
-        case "Garden":
-            iconImage = UIImage(named:"park_3")
+        case "Park","Garden":
+            iconImage = UIImage(named:"garden_location")
             break
         default:
-            iconImage = UIImage(named:"park_origin")
+            iconImage = UIImage(named:"park_3")
             break
         }
     }

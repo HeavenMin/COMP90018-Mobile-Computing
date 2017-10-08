@@ -268,7 +268,6 @@ class RunController: UIViewController,MKMapViewDelegate{
                 tap1.isEnabled = false
                 tap2.isEnabled = true
                 isPlaying = 1
-                startPoint = locationManager.location!.coordinate
                 tap1.setImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setImage(UIImage(named:"pause_catoon"), for: .normal)
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
@@ -312,6 +311,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     }
     
     
+    //update time counter and distance every second
     @objc func UpdateTimer() {
         counter = counter + 1
         let hour = counter / 3600
@@ -319,10 +319,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         let second = counter % 60
         timeLabel.text = String(format: "%d:%d:%d",hour,minute,second)
         endPoint = locationManager.location!.coordinate
-        drawPath(sourceLocation: startPoint, destinationLocation: endPoint)
         
-        //CLLocation(endPoint)
-        startPoint = locationManager.location!.coordinate
         drawingMap = true
         
         var locations = [CLLocation(latitude:startPoint.latitude,longitude:startPoint.longitude), CLLocation(latitude : endPoint.latitude,longitude : endPoint.longitude)]
@@ -332,8 +329,7 @@ class RunController: UIViewController,MKMapViewDelegate{
         
         var startPointCoordinate = CLLocation(latitude:startPoint.latitude,longitude: startPoint.longitude)
         var endPointCoordinate = CLLocation(latitude:endPoint.latitude,longitude: endPoint.longitude)
-        var shortDistance = startPointCoordinate.distance(from: endPointCoordinate)
-        distance = distance + shortDistance
+        distance = startPointCoordinate.distance(from: endPointCoordinate)
         distanceLabel.text = String(format:"%.2f meters",distance)
         
     }
