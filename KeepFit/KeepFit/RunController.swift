@@ -31,7 +31,7 @@ class RunController: UIViewController,MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        timeLabel.text = String("00:00:00")
         centerMapOnLocation(location: CLLocation(latitude:locationManager.location!.coordinate.latitude,longitude:locationManager.location!.coordinate.longitude))
         
         
@@ -300,7 +300,7 @@ class RunController: UIViewController,MKMapViewDelegate{
                 timer.invalidate()
                 isPlaying = 0
                 counter = 0
-                timeLabel.text = String(" 0: 0: 0")
+                timeLabel.text = String("00:00:00")
                 tap1.setBackgroundImage(UIImage(named:"start_green"), for: .normal)
                 tap2.setBackgroundImage(UIImage(named:"stop_red"), for: .normal)
                 
